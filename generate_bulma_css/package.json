@@ -1,0 +1,19 @@
+{
+  "name": "generate_bulma_css",
+  "version": "1.0.0",
+  "description": "generate bulma css",
+  "main": "geodev.sass",
+  "scripts": {
+    "css-build": "node-sass geodev.sass ../geodev/static/css/bulma.geodev.css",
+    "minify": "minify ../geodev/static/css/bulma.geodev.css > ../geodev/static/css/bulma.geodev.min.css"
+  },
+  "author": "TelesCoop.fr",
+  "license": "MIT",
+  "devDependencies": {
+    "bulma": "^0.9.3",
+    "node-sass": "^7.0.1"
+  },
+  "dependencies": {
+    "minify": "^8.0.4"
+  }
+}

@@ -1,0 +1,2 @@
+[prod]
+geodev.tlscp.fr:42722 ansible_user=ubuntu

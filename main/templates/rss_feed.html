@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+{% if obj.introduction %}{{ obj.introduction }}{% endif %}
+<br/>
+Date : {{ obj.publication_date|date:'d F Y' }}
+<br/>
+{{ obj.body }}
