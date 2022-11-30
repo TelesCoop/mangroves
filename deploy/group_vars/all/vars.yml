@@ -1,13 +1,13 @@
 ---
 
 organization_slug: telescoop
-project_slug: geodev
-main_user: geodev
+project_slug: mangmap
+main_user: mangmap
 main_user_uid: 1070  # must be unique for each project on the server
 public_hostnames:
-  - geodev.tlscp.fr
-django_project_name: geodev
-backend_repo: https://gitlab.com/telescoop-public/geodev
+  - mangmap.tlscp.fr
+django_project_name: mangmap
+backend_repo: https://gitlab.com/telescoop-public/mangroves
 backend_application_port: 8097  # must be unique for each project on the server
 backend_static_path: /{{ organization_slug }}/{{ project_slug}}/backend_static
 backend_media_path: /{{ organization_slug }}/{{ project_slug}}/backend/media

@@ -45,7 +45,7 @@ class Resource(index.Indexed, TimeStampedModel, FreeBodyField):
         Profile, blank=True, verbose_name="Profils", related_name="ressources"
     )
     geo_dev_creation = models.BooleanField(
-        default=False, verbose_name="Créé par GeoDEV ?"
+        default=False, verbose_name="Créé par mangmap ?"
     )
     source_name = models.CharField(
         verbose_name="Producteur de la ressource", max_length=100, blank=True

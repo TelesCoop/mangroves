@@ -2,10 +2,10 @@
   "name": "generate_bulma_css",
   "version": "1.0.0",
   "description": "generate bulma css",
-  "main": "geodev.sass",
+  "main": "mangmap.sass",
   "scripts": {
-    "css-build": "node-sass geodev.sass ../geodev/static/css/bulma.geodev.css",
-    "minify": "minify ../geodev/static/css/bulma.geodev.css > ../geodev/static/css/bulma.geodev.min.css"
+    "css-build": "node-sass mangmap.sass ../mangmap/static/css/bulma.mangmap.css",
+    "minify": "minify ../mangmap/static/css/bulma.mangmap.css > ../mangmap/static/css/bulma.mangmap.min.css"
   },
   "author": "TelesCoop.fr",
   "license": "MIT",

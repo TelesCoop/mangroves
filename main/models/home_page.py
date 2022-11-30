@@ -17,7 +17,7 @@ class HomePage(Page, models.Model):
         context["n_resources"] = Resource.objects.count()
         context["n_members"] = User.objects.count()
         context["profiles"] = Profile.objects.all()
-        first_news = News.objects.filter(is_geodev=True).first()
+        first_news = News.objects.filter(is_mangmap=True).first()
         if not first_news:
             first_news = News.objects.filter().first()
         if first_news:

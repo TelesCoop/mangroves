@@ -6,8 +6,8 @@ import getconf
 
 DEBUG = False
 config = getconf.ConfigGetter(
-    "geodev",
-    ["/etc/telescoop/geodev/settings.ini", "./local_settings.ini"],
+    "mangmap",
+    ["/etc/telescoop/mangmap/settings.ini", "./local_settings.ini"],
 )
 SECRET_KEY = config.getstr("security.secret_key")
 ALLOWED_HOSTS = config.getlist("security.allowed_hosts", [])
@@ -37,12 +37,12 @@ class MyFileStorage(ManifestStaticFilesStorage):
     manifest_strict = False
 
 
-STATICFILES_STORAGE = "geodev.settings.production.MyFileStorage"
+STATICFILES_STORAGE = "mangmap.settings.production.MyFileStorage"
 
 INSTALLED_APPS.append("telescoop_backup")  # noqa: F405
 BACKUP_ACCESS = config.getstr("backup.backup_access")  # S3 ACCESS
 BACKUP_SECRET = config.getstr("backup.backup_secret")  # S3 SECRET KEY
-BACKUP_BUCKET = "geodev-backup"  # S3 Bucket
+BACKUP_BUCKET = "mangmap-backup"  # S3 Bucket
 BACKUP_KEEP_N_DAYS = 31  # Optional, defaults to 31
 BACKUP_REGION = "eu-west-3"  # Optional, defaults to eu-west-3 (Paris)
 BACKUP_HOST = "s3.eu-west-3.amazonaws.com"  # Optional, default to s3.{BACKUP_REGIOn}.amazonaws.com

@@ -116,7 +116,7 @@
               return {
                   filteredResources: [],
                   isMapView: false,
-                  isOnlyGeoDev: false,
+                  isOnlyMangmap: false,
                   map: null,
                   profiles: profiles,
                   resources: JSON.parse('{{ resources | escapejs }}'),
@@ -299,8 +299,8 @@
                           }
                       }
 
-                      // GEODEV CREATION
-                      if (this.isOnlyGeoDev) {
+                      // mangmap CREATION
+                      if (this.isOnlyMangmap) {
                           if (!resource.geo_dev_creation) {
                               return false;
                           }

@@ -41,9 +41,9 @@ class News(index.Indexed, TimeStampedModel, FreeBodyField):
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    is_geodev = models.BooleanField(
-        verbose_name="Est une nouvelle GeoDEV",
-        help_text="La première actualité mise en avant sur la page d'accueil est la dernière actualité GeoDEV",
+    is_mangmap = models.BooleanField(
+        verbose_name="Est une nouvelle mangmap",
+        help_text="La première actualité mise en avant sur la page d'accueil est la dernière actualité mangmap",
         default=False,
     )
     types = models.ManyToManyField(
@@ -89,7 +89,7 @@ class News(index.Indexed, TimeStampedModel, FreeBodyField):
         FieldPanel("publication_date"),
         FieldPanel("image"),
         FieldPanel("introduction"),
-        FieldPanel("is_geodev"),
+        FieldPanel("is_mangmap"),
         FieldPanel("body"),
         FieldPanel("types", widget=forms.CheckboxSelectMultiple),
         FieldPanel("is_global"),

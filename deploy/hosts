@@ -1,2 +1,2 @@
 [prod]
-geodev.tlscp.fr:42722 ansible_user=ubuntu
+mangmap.tlscp.fr:42722 ansible_user=ubuntu

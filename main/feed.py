@@ -7,7 +7,7 @@ from main.templatetags.main_tags import news_page_url
 class LatestNewsFeed(Feed):
     title = "News"
     link = "/feed/news/latest"
-    description = "Les dernières actualités de GeoDEV."
+    description = "Les dernières actualités de mangmap."
     description_template = "rss_feed.html"
 
     def items(self):

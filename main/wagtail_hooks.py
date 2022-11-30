@@ -17,9 +17,9 @@ from main.models.resource import Resource
 
 @hooks.register("insert_global_admin_css", order=100)
 def global_admin_css():
-    """Add /static/css/geodev-admin.css to the admin."""
+    """Add /static/css/mangmap-admin.css to the admin."""
     return format_html(
-        '<link rel="stylesheet" href="{}">', static("css/geodev-admin.css")
+        '<link rel="stylesheet" href="{}">', static("css/mangmap-admin.css")
     )
 
 
