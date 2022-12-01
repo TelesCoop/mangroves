@@ -17,17 +17,19 @@ $family-secondary: $family-primary
   src: local(''), url('/static/fonts/inter/inter-v8-latin-700.eot?#iefix') format('embedded-opentype'), url('/static/fonts/inter/inter-v8-latin-700.woff2') format('woff2'), url('/static/fonts/inter/inter-v8-latin-700.woff') format('woff'), url('/static/fonts/inter/inter-v8-latin-700.ttf') format('truetype'), url('/static/fonts/inter/inter-v8-latin-700.svg#Inter') format('svg')
 
 // bulma colors
+$blue: #405FA6
+$green: #60923D
+$dark-green: #43652A
 $yellow: #FFE08A
 $purple: #324176
 $orange: #E56934
 $grey: #8698D6
-$blue: #209CEE
-$green: #48C78E
 $red: #FF3860
 
 // derived colors
-$primary: $purple
-$secondary: $orange
+$primary: $blue
+$secondary: $green
+$dark-secondary: $dark-green
 $info: $blue
 $link: $purple
 $warning: $yellow
@@ -60,21 +62,23 @@ $mnt-invert: findColorInvert($mnt)
 $secondary-invert: findColorInvert($secondary)
 $custom-colors: ("agriculture": ($agriculture, $agriculture-invert), "floors": ($floors, $floors-invert), "biodiversity": ($biodiversity, $biodiversity-invert), "water": ($water, $water-invert), "risks": ($risks, $risks-invert), "health": ($health, $health-invert), "cities": ($cities, $cities-invert), "forest": ($forest, $forest-invert), "littoral": ($littoral, $littoral-invert), "climat": ($climat, $climat-invert), "mnt": ($mnt, $mnt-invert), "secondary": ($secondary, $secondary-invert))
 
-
 @each $name, $components in $custom-colors
   .button.is-#{$name}.is-outlined:focus
     background: transparent !important
     color: nth($components, 1) !important
 
 .button.is-primary.is-outlined:focus
-    background: transparent !important
-    color: $primary !important
+  background: transparent !important
+  color: $primary !important
 
 // Text colors
-$text: $purple
+$text: $primary
 $title-color: $text
 $content-heading-color: $text
 $label-color: $text
+$navbar-item-color: $secondary
+$navbar-item-hover-color: $dark-secondary
+$navbar-item-active-color: $dark-secondary
 
 // other custom
 $gap: 24px

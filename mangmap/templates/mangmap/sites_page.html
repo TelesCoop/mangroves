@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load main_tags %}
+
+{% block content %}
+  <div class="container pt-3 mb-5">
+    {% include "components/breadcrumbs.html" %}
+
+    <h1 class="title is-1">Les sites</h1>
+  </div>
+  <div id="app">
+
+    <div class="section container">
+      <div>
+        <p class="has-text-weight-bold my-4">
+          <template v-if="filteredSites.length">
+            [[ filteredSites.length ]] résultats correspondent à votre recherche
+          </template>
+          <template v-else>
+            aucun résultat correspondant
+          </template>
+        </p>
+        <div class="mb-6" style="display: flex; justify-content: center">
+          <div class="tabs is-toggle is-toggle-rounded">
+            <ul>
+              <li :class="isMapView ? '' : 'is-active'" @click="isMapView = false">
+                <a>
+                <span class="icon is-small"
+                      style="line-height: 0">{% include "components/icon.html" with name="list-check" size="16" %}</span>
+                  <span>Voir la liste</span>
+                </a>
+              </li>
+              <li :class="isMapView ? 'is-active' : ''" @click="enableMapView()">
+                <a>
+                <span class="icon is-small" style="line-height: 0">
+                  {% include "components/icon.html" with name="earth" size="16" %}
+                </span>
+                  <span>Voir sur la carte</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {% include "elements/sites_page/sites_list_view.html" %}
+
+      {% include "elements/sites_page/sites_map_view.html" %}
+
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block extra_js %}
+  <script>
+      function normalize(str) {
+          return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      }
+
+      function startsWith(str, other) {
+          return normalize(str).indexOf(normalize(other)) === 0;
+      }
+
+
+      Vue.createApp({
+          delimiters: ['[[', ']]'],
+          data() {
+              return {
+                  filteredSites: [],
+                  isMapView: false,
+                  isOnlyMangmap: false,
+                  map: null,
+                  sites: JSON.parse('{{ sites | escapejs }}'),
+                  countryParameters: countryParameters,
+                  searchInput: '',
+              }
+          },
+          methods: {
+              enableMapView() {
+                  // load mapbox js and css files
+                  this.isMapView = true;
+                  var head = document.getElementsByTagName('head')[0];
+                  var link = document.createElement('link');
+                  link.rel = 'stylesheet';
+                  link.type = 'text/css';
+                  link.href = '{% static 'css/mapbox-gl.css' %}';
+                  link.media = 'all';
+                  head.appendChild(link);
+
+                  var script = document.createElement('script');
+                  script.onload = () => {
+                      this.initMap();
+                      this.updateMap();
+                  };
+                  script.src = '{% static 'js/mapbox-gl.js' %}';
+                  document.head.appendChild(script); //or something of the likes
+              },
+              initMap() {
+                  mapboxgl.accessToken = 'pk.eyJ1IjoibWF4aW1ldGVsZXNjb29wIiwiYSI6ImNrbHJrbWV6ajAzd20ycXB2YjZodzZ0ancifQ.VLDpa6x-j-3kh65_S-H_rA';
+
+                  this.map = new mapboxgl.Map({
+                      container: 'map',
+                      style: 'mapbox://styles/maximetelescoop/ckz2nizcg007c14nt4j1x4nc9',
+                      center: [22.3688733, 1.9171377], // starting position [lng, lat]
+                      zoom: 2,
+                  });
+                  window.map = this.map;
+                  this.map.on('zoom', () => {
+                      this.updateMap();
+                  });
+                  map.addControl(new mapboxgl.NavigationControl({showCompass: false}));
+              },
+
+              updateMap() {
+                  const isShowingCountries = this.map.getZoom() > 2.9;
+                  // reset markers
+                  for (var marker of markers) {
+                      marker.remove();
+                  }
+                  markers = [];
+                  console.log("### updateMap", isShowingCountries, this.filteredSites, markers);
+                  // building a sitePerCountry dict
+                  var sitesPerCountry = {};
+                  var sitesPerZone = {};
+                  var addedsitePerZone = {};
+                  zones.forEach(zone => {
+                      addedsitePerZone[zone.code] = {}
+                  });
+                  var atLeastOneSelectedZone = Object.values(this.selectedZones).some(function (e) {
+                      return e
+                  });
+
+                  for (const site of this.filteredSites) {
+                      var siteCountries = site.countries;
+                      if (site.is_global) {
+                          siteCountries = countries.map(country => country.code);
+                      }
+                      for (const country of siteCountries) {
+                          // if zone(s) are selected, do not display countries and zones outside of zones
+                          if (!atLeastOneSelectedZone || this.selectedZones[countryParameters[country].zone]) {
+                              if (sitesPerCountry[country] == null) {
+                                  sitesPerCountry[country] = [];
+                              }
+                              sitesPerCountry[country].push(site);
+                              const zone = countryParameters[country].zone;
+                              if (zone) {
+                                  if (sitesPerZone[zone] == null) {
+                                      sitesPerZone[zone] = [];
+                                  }
+                                  if (!addedsitePerZone[zone][site.id]) {
+                                      addedSitePerZone[zone][site.id] = true;
+                                      sitesPerZone[zone].push(site);
+                                  }
+                              }
+                          }
+                      }
+                  }
+
+                  let siteBase = sitesPerZone;
+                  let parametersBase = zoneParameters;
+                  if (isShowingCountries) {
+                      siteBase = sitesPerCountry;
+                      parametersBase = countryParameters;
+                  }
+
+                  // adding sites per country to the map
+                  for (const params of Object.entries(siteBase)) {
+                      const localityKey = params[0];
+                      const sites = params[1];
+
+                      // building marker for country
+                      const marker = document.createElement('div');
+                      marker.className = "country-marker";
+                      const markerChild = document.createElement('div');
+                      markerChild.innerText = sites.length;
+                      marker.appendChild(markerChild);
+                      const localityParams = parametersBase[localityKey];
+
+                      // building popup for marker
+                      const popupHtml = document.createElement("div");
+                      const popupHolder = document.createElement("div");
+                      popupHolder.className = "country-popup";
+                      const title = document.createElement("h2");
+                      title.className = "mb-4";
+                      title.innerHTML = (
+                          "<span class='has-text-weight-bold'>" + sites.length + " sites </span>"
+                          + "disponibles " + (isShowingCountries ? 'au' : 'en')
+                          + " <span class='has-text-weight-bold'>" + localityParams.name + "</span> :"
+                      );
+                      popupHolder.appendChild(title);
+                      const sitesHolder = document.createElement("ul");
+                      sitesHolder.className = "sites-holder";
+                      for (const site of sites) {
+                          const element = document.createElement("div");
+                          if (site.thematic) {
+                              element.className = "card has-background-" + site.thematic + "-light";
+                          } else {
+                              element.className = "card has-background-info-light";
+                          }
+
+                          var elementContent = document.createElement("div");
+                          elementContent.className = "card-content";
+                          var elementTop = document.createElement("div");
+                          elementTop.className = "site-top-line";
+                          elementTop.style.display = "flex";
+                          elementTop.style.justifyContent = "space-between";
+                          var topLeft = document.createElement("div");
+                          topLeft.innerText = site.thematics
+                              .map(thematic => this.thematicBySlug[thematic].name)
+                              .join(", ");
+                          var topRight = document.createElement("div");
+                          topRight.innerText = site.types.map(type_ => siteTypeBySlug[type_].name).join(", ");
+                          elementTop.appendChild(topLeft);
+                          elementTop.appendChild(topRight);
+                          elementContent.appendChild(elementTop);
+                          var titleLink = document.createElement("a");
+                          titleLink.href = site.link;
+                          var elementTitle = document.createElement("h3");
+                          elementTitle.innerText = site.name;
+                          elementTitle.className = "title is-5 has-text-weight-bold mb-4";
+                          titleLink.appendChild(elementTitle);
+                          elementContent.appendChild(titleLink);
+                          var elementIntro = document.createElement("p");
+                          elementIntro.innerHTML = site.short_description_max_250;
+                          elementContent.appendChild(elementIntro);
+                          var elementButton = document.createElement("a");
+                          elementButton.href = site.link;
+                          elementButton.target = "_blank"
+                          elementButton.className = "button is-secondary";
+                          elementButton.innerText = "Accéder à la site";
+                          elementContent.appendChild(elementButton);
+
+                          element.appendChild(elementContent);
+                          sitesHolder.appendChild(element);
+                      }
+                      popupHolder.appendChild(sitesHolder);
+                      popupHtml.appendChild(popupHolder);
+
+                      const popup = new mapboxgl.Popup({offset: 25}).setHTML(
+                          popupHtml.innerHTML
+                      );
+
+                      // add the marker with popup to the map
+                      markers.push(
+                          new mapboxgl.Marker(marker)
+                              .setLngLat([localityParams.longitude, localityParams.latitude])
+                              .setPopup(popup)
+                              .addTo(this.map)
+                      );
+                  }
+              }
+          },
+      }).mount('#app')
+  </script>
+{% endblock extra_js %}
+
+{% block extra_css %}
+  {% include "elements/sites_page/styles.html" %}
+{% endblock %}

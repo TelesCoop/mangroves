@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load main_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+  <div class="banner-image-container p-4">
+    <div class="banner-image">
+      {% image page.specific.banner_image fill-1000x350 as banner_image %}
+      <img src="{{banner_image.url}}" class="fr-responsive-img" alt="">
+    </div>
+    <div class="container" style="height: 100%">
+        <div class="columns" style="height: 100%; justify-content: space-between; align-items: center;">
+          <div class="column is-4 is-half-touch">
+            <div class="p-5 text-container">
+              <h1 class="title is-3 has-text-white">{{page.specific.title}}</h1>
+              <p>
+                {{ page.specific.introduction|richtext }}
+              </p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="has-background-info-light">
+    <div class="container section py-2">
+      <h2 class="title is-3 mt-3">{{ page.specific.news_block_title|richtext }}</h2>
+      <div class="columns">
+        {% for news in news_list %}
+          <div class="column {% if forloop.counter == 1 %}is-6{% else %}is-3{% endif %}">
+            {% include "components/news_card.html" with news=news is_small=forloop.counter0 large_by_default=1 full_height=1 %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="has-text-centered mt-5">
+        <a href="{{ news_list_link }}" class="button is-medium is-secondary">Toutes les actualités</a>
+      </div>
+    </div>
+  </div>
+  <div class="has-background-secondary-light">
+    <div class="container section">
+      <div class="columns">
+        <div class="column is-6">
+          <img src="{% static 'img/home-stay-tuned.svg' %}">
+        </div>
+        <div class="column is-6">
+          <div class="is-flex is-align-items-center is-justify-content-center" style="height: 100%">
+            <div>
+              <h2 class="title is-3">Tenez-vous informés</h2>
+              <p>Inscrivez-vous à notre newsletter pour vous tenir au courant de notre actualité.</p>
+              <div class="mt-3">
+                <a target="_blank" href="{{ settings.mangmap.NewsLetterSettings.newsLetter }}" class="button is-secondary">
+                  Accéder au formulaire
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -23,8 +23,10 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
-    "main",
+    "mangmap",
     "search",
+    "wagtail_localize",
+    "wagtail_localize.locales",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -57,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
@@ -75,7 +78,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "main.context_processors.general_context",
+                "mangmap.context_processors.general_context",
                 "wagtail.contrib.settings.context_processors.settings",
             ],
         },
@@ -123,7 +126,14 @@ USE_I18N = True
 
 USE_L10N = True
 
+WAGTAIL_I18N_ENABLED = True
+
 USE_TZ = True
+
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ("fr", "French"),
+    ("en", "English"),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
