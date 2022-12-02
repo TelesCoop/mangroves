@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-02 11:00+0100\n"
+"POT-Creation-Date: 2022-12-02 12:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: mangmap/templates/404.html:4 mangmap/templates/404.html:10
+msgid "La page n'a pas été trouvée"
+msgstr ""
+
+#: mangmap/templates/404.html:13
+msgid "Elle a peut-être été déplacée, ou n'existe pas."
+msgstr ""
+
+#: mangmap/templates/404.html:16
+msgid "Retour à l'accueil"
+msgstr ""
+
 #: mangmap/templates/components/navbar.html:58
 msgid "Plateforme"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:26
+msgid "Formulaire de contact"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:27
+msgid "Les champs comprenant une astérisque (*) sont obligatoires."
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:35
+msgid "Prénom"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:41
+msgid "Adresse e-mail"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:49
+msgid "Nom"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:55
+msgid "Pays"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:64
+msgid "Quelle est la raison de votre prise de contact ?"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:68
+msgid "Partage d'actualités"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:69
+msgid "Proposition de collaboration"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:70
+msgid "Partager une ressource"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:71
+msgid "Demande d'informations"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:72
+msgid "Avis sur ce site web"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:74
+msgid "Autre"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:81
+msgid "Message"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:91
+msgid "J'autorise ce site à conserver mes données transmises via ce formulaire"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:115
+msgid "Tenez-vous informés"
+msgstr ""
+
+#: mangmap/templates/mangmap/contact_page.html:121
+msgid "Accéder au formulaire"
 msgstr ""

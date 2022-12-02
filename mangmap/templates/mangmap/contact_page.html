@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 {% load main_tags %}
 
 {% block content %}
   <div class="section container pt-6">
+    <p>cc - {{translated_url}}</p>
     {% include "components/breadcrumbs.html" %}
 
     <div class="has-background-white">
@@ -23,8 +24,8 @@
         <div class="column is-6">
           <div class="card">
             <div class="card-content">
-              <h2 class="title is-2">Formulaire de contact</h2>
-              <p>Les champs comprenant une astérisque (*) sont obligatoires.</p>
+              <h2 class="title is-2">{% translate "Formulaire de contact" %}</h2>
+              <p>{% translate "Les champs comprenant une astérisque (*) sont obligatoires." %}</p>
 
               <form action="" method="post">
                 {% csrf_token %}
@@ -32,13 +33,13 @@
                 <div class="columns mt-5">
                   <div class="column is-6">
                     <div class="field">
-                      <label for="firstname" class="label">Prénom *</label>
+                      <label for="firstname" class="label">{% translate "Prénom" %} *</label>
                       <div class="control">
                         <input name="firstname" id="firstname" class="input" type="text" placeholder="Jean">
                       </div>
                     </div>
                     <div class="field">
-                      <label for="email" class="label">Adresse e-mail *</label>
+                      <label for="email" class="label">{% translate "Adresse e-mail" %} *</label>
                       <div class="control">
                         <input name="email" id="email" class="input" type="email" placeholder="exemple@mail.com">
                       </div>
@@ -46,13 +47,13 @@
                   </div>
                   <div class="column is-6">
                     <div class="field">
-                      <label for="lastname" class="label">Nom *</label>
+                      <label for="lastname" class="label">{% translate "Nom" %} *</label>
                       <div class="control">
                         <input name="lastname" id="lastname" class="input" type="text" placeholder="Dupont">
                       </div>
                     </div>
                     <div class="field">
-                      <label for="country" class="label">Pays *</label>
+                      <label for="country" class="label">{% translate "Pays" %} *</label>
                       <div class="control">
                         <input name="country" id="country" class="input" type="text" placeholder="France">
                       </div>
@@ -61,27 +62,24 @@
                 </div>
 
                 <div class="field">
-                  <label for="subject" class="label">Quelle est la raison de votre prise de contact ?</label>
+                  <label for="subject" class="label">{% translate "Quelle est la raison de votre prise de contact ?" %}</label>
                   <div class="control">
                     <div class="select">
                       <select name="subject" id="subject">
-                        <option value="Proposition de collaboration">Proposition de collaboration</option>
-                        <option value="Partage d'actualités">Partage d'actualités</option>
-                        <option value="Partage de sites">Partage de sites</option>
-                        <option value="Adhésion au réseau">Adhésion au réseau</option>
-                        <option value="Demande d'informations sur l'ART mangmap">Demande d'informations sur l'ART mangmap
+                        <option value="Partage d'actualités">{% translate "Partage d'actualités" %}</option>
+                        <option value="Proposition de collaboration">{% translate "Proposition de collaboration" %}</option>
+                        <option value="Partage de ressource">{% translate "Partager une ressource" %}</option>
+                        <option value="Demande d'informations">{% translate "Demande d'informations" %}</option>
+                        <option value="Avis sur ce site web" {% if review_selected %}selected{% endif %}>{% translate "Avis sur ce site web" %}
                         </option>
-                        <option value="Avis sur ce site web" {% if review_selected %}selected{% endif %}>Avis sur ce
-                          site web
-                        </option>
-                        <option value="Autre">Autre</option>
+                        <option value="Autre">{% translate "Autre" %}</option>
                       </select>
                     </div>
                   </div>
                 </div>
 
                 <div class="field">
-                  <label for="message" class="label">Message</label>
+                  <label for="message" class="label">{% translate "Message" %}</label>
                   <div class="control">
                     <textarea name="message" id="message" class="textarea" placeholder="Textarea"></textarea>
                   </div>
@@ -91,7 +89,7 @@
                   <div class="control">
                     <label class="checkbox">
                       <input name="agree" type="checkbox">
-                      J'autorise ce site à conserver mes données transmises via ce formulaire
+                      {% translate "J'autorise ce site à conserver mes données transmises via ce formulaire" %}
                     </label>
                   </div>
                 </div>
@@ -115,13 +113,13 @@
         </div>
         <div class="column is-6 is-flex" style="align-items: center">
           <div>
-            <h2 class="title is-2">Tenez-vous informés</h2>
+            <h2 class="title is-2">{% translate "Tenez-vous informés" %}</h2>
             <div>
               {{ page.specific.newsletter_text | richtext }}
             </div>
             <div class="mt-5">
               <a target="_blank" href="{{ settings.mangmap.NewsLetterSettings.newsLetter }}" class="button is-secondary">
-                Accéder au formulaire
+                {% translate "Accéder au formulaire" %}
               </a>
             </div>
 
