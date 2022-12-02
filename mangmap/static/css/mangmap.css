@@ -1,9 +1,3 @@
-.top-left-image {
-    position: fixed;
-    top: 0;
-    z-index: 35;
-}
-
 /* NAVBAR */
 .logo-holder {
     display: flex;
@@ -72,12 +66,6 @@
     flex: auto;
 }
 
-@media screen and (max-width: 1733px) {
-    .top-left-image {
-        display: none;
-    }
-}
-
 .pdf-holder {
     display: flex;
     flex-direction: row;
@@ -132,12 +120,12 @@
 /* TODO : make a better management of banner image */
 .banner-image-container {
     position: relative;
-    height: 350px
+    height: 400px
 }
 
 .banner-image-container .banner-image {
     position: absolute;
-    max-height: 350px;
+    max-height: 400px;
     width: 100%;
     top: 0;
     left: 0;
@@ -152,6 +140,6 @@
 
 .banner-image-container .text-container {
     color: white;
-    /* Secondary color with 50% of opacity */
-    background-color: #61923d84;
+    /* Secondary color with transparency */
+    background-color: #61923d96;
 }

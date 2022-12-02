@@ -1,12 +1,12 @@
-{% load static %}
+{% load static i18n %}
 {% load main_tags %}
 
 <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 30; background: white">
   <div class="container">
     <nav class="navbar" id="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item logo-holder" href="/">
-          <img src="/static/img/mangmap.png" width="256" height="47">
+        <a class="navbar-item logo-holder" href="/{{ language_code }}/">
+          <img src="{% static 'img/mangmap/logo_couleur.svg' %}" width="256" height="116">
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
@@ -55,12 +55,39 @@
           <div class="navbar-item">
             <div class="buttons">
               <a href="{{settings.mangmap.StructureSettings.plateformUrl}}" class="button is-secondary">
-                <span>Plateforme</span>
+                <span>{% translate "Plateforme"%}</span>
               </a>
             </div>
           </div>
+          {# Change language #}
+          {% if page and language_code %}
+            {% if language_code == "fr" %}
+              <a
+                class="navbar-item"
+                href="{{ translated_url }}"
+                rel="alternate"
+                hreflang="{{ language_code }}"
+                style="max-width: 5rem"
+              >
+                🇬🇧 EN
+              </a>
+            {% endif %}
+            {% if language_code == "en" %}
+              <a
+                class="navbar-item"
+                href="{{ translated_url }}"
+                rel="alternate"
+                hreflang="{{ language_code }}"
+                style="max-width: 5rem"
+              >
+                🇫🇷 FR
+              </a>
+            {% endif %}
+          {% endif %}
         </div>
       </div>
     </nav>
+    
   </div>
 </div>
+

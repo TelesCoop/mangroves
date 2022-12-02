@@ -40,3 +40,21 @@ Ces pages peuvent être ajoutées / modifiées en créant / modifiant une page d
 
 - `mentions-legales` pour les mentions légales
 - `donnees-personnelles` pour les données personnelles
+
+
+## Pour les développeurs
+
+### Mettre à jour les traductions :
+
+- Créer ou mettre à jour un fichier de traductions (à faire pour chaque langue, `fr` ou `en`) :
+    `django-admin makemessages -l fr`
+- Renseigner à la main les traductions dans les fichiers .po autogénéré
+- Compiler les fichiers de traductions:
+    `django-admin compilemessages`
+
+### Mettre à jour les fichiers Bulma :
+
+- `cd generate_bulma_css/`
+- `yarn install`
+- `yarn css-build`
+- `yarn minify`

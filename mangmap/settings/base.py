@@ -61,6 +61,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "mangmap.middlewares.SearchDescriptionAndTranslationMiddleware",
 ]
 
 ROOT_URLCONF = "mangmap.urls"
@@ -79,6 +80,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "mangmap.context_processors.general_context",
+                "mangmap.context_processors.language",
                 "wagtail.contrib.settings.context_processors.settings",
             ],
         },
