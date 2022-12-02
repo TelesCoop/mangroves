@@ -12,42 +12,9 @@
   </div>
   <div id="app">
 
-    <div class="section container">
-      <div>
-        <p class="has-text-weight-bold my-4">
-          <template v-if="filteredSites.length">
-            [[ filteredSites.length ]] résultats correspondent à votre recherche
-          </template>
-          <template v-else>
-            aucun résultat correspondant
-          </template>
-        </p>
-        <div class="mb-6" style="display: flex; justify-content: center">
-          <div class="tabs is-toggle is-toggle-rounded">
-            <ul>
-              <li :class="isMapView ? '' : 'is-active'" @click="isMapView = false">
-                <a>
-                <span class="icon is-small"
-                      style="line-height: 0">{% include "components/icon.html" with name="list-check" size="16" %}</span>
-                  <span>Voir la liste</span>
-                </a>
-              </li>
-              <li :class="isMapView ? 'is-active' : ''" @click="enableMapView()">
-                <a>
-                <span class="icon is-small" style="line-height: 0">
-                  {% include "components/icon.html" with name="earth" size="16" %}
-                </span>
-                  <span>Voir sur la carte</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {% include "elements/sites_page/sites_list_view.html" %}
-
-      {% include "elements/sites_page/sites_map_view.html" %}
+    <div>
+      <div id='map' style='width: 100%; height: 800px;'></div>
+    </div>
 
     </div>
   </div>
@@ -56,6 +23,8 @@
 
 {% block extra_js %}
   <script>
+      enableMapView()
+      
       function normalize(str) {
           return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       }
@@ -258,5 +227,77 @@
 {% endblock extra_js %}
 
 {% block extra_css %}
-  {% include "elements/sites_page/styles.html" %}
+<style>
+  .elements-holder {
+      margin-top: -10px;
+      margin-left: -16px;
+  }
+
+  .elements-holder > * {
+      margin-top: 10px;
+      margin-left: 16px;
+  }
+
+  .has-background-std {
+      background: #EEF3FC;
+  }
+
+  .country-marker {
+      background-image: url("{% static 'img/pin.svg' %}");
+      background-repeat: no-repeat;
+      width: 75px;
+      height: 180px;
+      text-align: center;
+      color: white;
+      font-size: 16px;
+      /* padding-top: 0.9em; */
+      font-weight: bold;
+      background-position: bottom 90px center;
+      background-size: contain;
+  }
+
+  .country-marker > div {
+      width: 45px;
+      height: 45px;
+      background: #5469B3;
+      text-align: center;
+      margin-top: 12px;
+      margin-left: 15px;
+      border-radius: 100%;
+      padding-top: 12px;
+  }
+
+  .mapboxgl-popup-content {
+      padding: 24px !important;
+      width: 442px;
+      max-height: 433px;
+  }
+
+  .sites-holder {
+      max-height: 351px;
+      overflow-y: auto;
+      margin-top: -19px;
+  }
+
+  .sites-holder > div {
+      margin-top: 19px;
+  }
+
+  .site-top-line {
+      font-size: 0.75rem;
+  }
+
+  .button.is-secondary.is-outlined:focus {
+      background: transparent !important;
+      color: #E56934 !important;
+  }
+
+  .button.is-outlined:hover .icon img, .button:not(.is-outlined) .icon img {
+      filter: brightness(0) invert(1);
+  }
+  .button.is-disabled{
+      opacity: 0.5;
+      cursor: not-allowed;
+  }
+</style>
 {% endblock %}
