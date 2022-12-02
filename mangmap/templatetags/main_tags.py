@@ -1,14 +1,17 @@
 import hashlib
 
 from django.template.defaulttags import register
+from django.utils import translation
 
 
 @register.simple_tag()
 def news_page_url(news=None):
     from mangmap.models.news_list_page import NewsListPage
 
+    current_language = translation.get_language()
+
     try:
-        news_list_page = NewsListPage.objects.get()
+        news_list_page = NewsListPage.objects.get(locale__language_code=current_language)
     except NewsListPage.DoesNotExist:
         raise NewsListPage.DoesNotExist("A NewsListPage must be created")
 
