@@ -2,6 +2,7 @@ from typing import List
 
 from django.core.exceptions import ValidationError
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
@@ -44,10 +45,10 @@ class ContactPage(Page):
         else:
             form = ContactForm(request.POST)
 
-        context = self.get_context(request)
+        context = self.get_context(request, *args, **kwargs)
         context["form"] = form
         context["review_selected"] = bool(request.GET.get("review"))
-        return render(
+        return TemplateResponse(
             request,
             "mangmap/contact_page.html",
             context,
