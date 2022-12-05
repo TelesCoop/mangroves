@@ -18,9 +18,6 @@ from mangmap.models.utils import (
 class Site(index.Indexed, TimeStampedModel, FreeBodyField):
     countries = models.ManyToManyField(Country, verbose_name="Pays", blank=True)
     zones = models.ManyToManyField(WorldZone, verbose_name="Zones", blank=True)
-    is_global = models.BooleanField(
-        verbose_name="Concerne tous les pays", default=False
-    )
     name = models.CharField(verbose_name="Nom", max_length=100)
     slug = models.SlugField(
         max_length=100,
@@ -76,7 +73,6 @@ class Site(index.Indexed, TimeStampedModel, FreeBodyField):
         FieldPanel("types", widget=forms.CheckboxSelectMultiple),
         FieldPanel("thematics", widget=forms.CheckboxSelectMultiple),
         FieldPanel("geo_dev_creation"),
-        FieldPanel("is_global"),
         FieldPanel("zones", widget=forms.CheckboxSelectMultiple),
         FieldPanel("countries", widget=forms.SelectMultiple),
     ]
@@ -86,7 +82,6 @@ class Site(index.Indexed, TimeStampedModel, FreeBodyField):
             self,
             fields=[
                 "id",
-                "is_global",
                 "name",
                 "slug",
                 "thematics",

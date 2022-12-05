@@ -12,28 +12,7 @@
               {% endif %}">
       <div class="card-content">
         <div class="is-flex" style="justify-content: space-between; font-size: 11px">
-          <div>
-            {% if main_thematic %}
-              <span class="icon">
-                <img src="{{ main_thematic.icon_or_default }}">
-              </span>
-              {{ main_thematic.name }}
-            {% else %}
-              <span>
-                <span class="icon">
-                {% if site.thematics.count %}
-                {% else %}
-                  <img src="{% static 'img/thematics/unspecified.svg' %}">
-                {% endif %}
-                </span>
-                {% if site.thematics.count %}
-                  Plusieurs thématiques
-                {% else %}
-                  Sans thématique
-                {% endif %}
-              </span>
-            {% endif %}
-          </div>
+          
           {% if site.zones.first %}
             <div>
               <span class="icon">
