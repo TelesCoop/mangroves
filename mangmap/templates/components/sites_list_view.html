@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 <div v-if="!isMapView" class="card-holder">
   <template v-for="site in sites"
@@ -75,7 +75,7 @@
             <span class="icon">
               {% include "components/icon.html" with size="16" name="share-box" %}
             </span>
-              <span>Accéder à la site</span>
+              <span>{% translate "Accéder au lien du site" %}</span>
             </button>
           </div>
         </a>

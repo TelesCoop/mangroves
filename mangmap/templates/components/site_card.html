@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 {% load main_tags %}
 {% load wagtailcore_tags %}
 
@@ -51,7 +51,7 @@
             <span>
             <span class="icon"><img src="{% static 'img/source.svg' %}"
                                     style="width: 12px; height: 12px;"></span>
-            Source : {{ site.source_name }}
+            {% translate "Source" %} : {{ site.source_name }}
           </span>
           {% endif %}
         </div>
@@ -60,7 +60,7 @@
           <span>
             <span class="icon"><img src="{% static 'img/site_is_mangmap.svg' %}"
                                     style="width: 12px; height: 12px;"></span>
-            Site mangmap
+            {% translate "Site" %} mangmap
           </span>
           </div>
         {% endif %}
@@ -69,7 +69,7 @@
             <span class="icon">
               {% include "components/icon.html" with size="16" name="share-box" %}
             </span>
-            <span>Accéder à la site</span>
+            <span>{% translate "Accéder au lien du site" %}</span>
           </button>
         </div>
       </div>

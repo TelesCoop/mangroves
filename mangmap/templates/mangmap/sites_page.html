@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 {% load main_tags %}
@@ -8,7 +8,7 @@
   <div class="container pt-3 mb-5">
     {% include "components/breadcrumbs.html" %}
 
-    <h1 class="title is-1">Les sites</h1>
+    <h1 class="title is-1">{% translate "Les sites" %}</h1>
   </div>
   <div id="app">
     {% comment %} {% include "elements/sites_page/filters.html" %} {% endcomment %}
@@ -22,7 +22,7 @@
                 <a>
                 <span class="icon is-small"
                       style="line-height: 0">{% include "components/icon.html" with name="list-check" size="16" %}</span>
-                  <span>Voir la liste</span>
+                  <span>{% translate "Voir la liste" %}</span>
                 </a>
               </li>
               <li :class="isMapView ? 'is-active' : ''" @click="enableMapView()">
@@ -30,7 +30,7 @@
                 <span class="icon is-small" style="line-height: 0">
                   {% include "components/icon.html" with name="earth" size="16" %}
                 </span>
-                  <span>Voir sur la carte</span>
+                  <span>{% translate "Voir sur la carte" %}</span>
                 </a>
               </li>
             </ul>

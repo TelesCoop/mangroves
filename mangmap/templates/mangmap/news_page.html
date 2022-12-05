@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 {% load main_tags %}
@@ -21,7 +21,7 @@
   </div>
   {% if news.news.count %}
     <div class="container section">
-      <h2 class="title is-2 has-text-centered">Actualités recommandées</h2>
+      <h2 class="title is-2 has-text-centered">{% translate "Actualités recommandées" %}</h2>
       <div class="card-holder">
         {% for news_ in news.news.all %}
           {% include "components/news_card.html" with news=news_ width=321 %}
@@ -32,7 +32,7 @@
 
   {% if news.sites.count %}
     <div class="container section">
-      <h2 class="title is-2 has-text-centered">Sites recommandées</h2>
+      <h2 class="title is-2 has-text-centered">{% translate "Sites consernés" %}</h2>
       <div class="card-holder">
         {% for site in news.sites.all %}
           {% include "components/site_card.html" with site=site %}

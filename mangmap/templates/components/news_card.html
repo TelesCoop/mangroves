@@ -1,6 +1,7 @@
 {% load main_tags %}
 {% load wagtailimages_tags %}
 {% load wagtailcore_tags %}
+{% load i18n %}
 
 <a href="{% news_page_url news %}">
   <div class="card" {% if width %} style="width: {{ width }}px;"{% endif %}
@@ -17,7 +18,7 @@
       <p class="is-size-7 has-text-primary">{{ news.publication_date | date }}</p>
       <div class="has-text-primary">{{ news.introduction|richtext }}</div>
       <div class="mt-3">
-        <a href="{{ news.link }}" class="button is-secondary">Lire la suite</a>
+        <a href="{{ news.link }}" class="button is-secondary">{% translate "Lire la suite" %}</a>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 <footer class="footer">
   <div class="container">
@@ -6,10 +6,10 @@
       <div class="column is-8 is-flex is-align-items-center desktop is-flex-direction-column-until-widescreen"
            style="margin: auto">
         <img src="{% static 'img/mangmap/logo_couleur.svg' %}" width="206" height="38">
-        <a href="/mentions-legales" class="button is-small is-text">Mentions légales</a>
-        <a href="/donnees-personnelles" class="button is-small is-text">Données personnelles</a>
-        <a href="/admin" class="button is-small is-text">intranet</a>
-        <a href="/contact/?review=1" class="button is-small is-text">Je donne mon avis sur ce site</a>
+        <a href="/mentions-legales" class="button is-small is-text">{% translate "Mentions légales" %}</a>
+        <a href="/donnees-personnelles" class="button is-small is-text">{% translate "Données personnelles" %}</a>
+        <a href="/admin" class="button is-small is-text">{% translate "intranet" %}</a>
+        <a href="/contact/?review=1" class="button is-small is-text">{% translate "Je donne mon avis sur ce site" %}</a>
       </div>
       <div class="column is-flex is-4 is-justify-content-center footer-logos is-align-items-center">
         <a href="https://www.theia-land.fr">
@@ -27,8 +27,8 @@
     <div class="columns-widescreen is-justify-content-space-between">
       <div class="column is-8 is-flex is-align-items-center desktop is-flex-direction-column-until-widescreen">
         <p class="is-size-7">
-          <a href="http://telescoop.fr/">Développé par <span style="text-decoration: underline">TelesCoop</span></a>,
-          <a href="https://www.behance.net/leopoldine-m">design par <span style="text-decoration: underline">Leopoldine Mennessier</span></a>
+          <a href="http://telescoop.fr/">{% translate "Développé par" %} <span style="text-decoration: underline">TelesCoop</span></a>,
+          <a href="https://www.behance.net/leopoldine-m">{% translate "design par" %} <span style="text-decoration: underline">Leopoldine Mennessier</span></a>
         </p>
       </div>
       <div></div>
