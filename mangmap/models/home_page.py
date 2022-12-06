@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.core.fields import RichTextField
 from mangmap.models.models import BannerImagePage
 
@@ -43,9 +43,74 @@ class HomePage(BannerImagePage, models.Model):
         default="Dernières actualités",
     )
 
+    platform_block_title = models.CharField(
+        blank=True,
+        verbose_name="Titre",
+        max_length=64,
+        default="Notre plateforme",
+    )
+    platform_block_description = RichTextField(
+        null=True,
+        blank=True,
+        features=SIMPLE_RICH_TEXT_FIELD_FEATURE + ["h2", "h3", "h4", "ol", "ul"],
+        verbose_name="Description",
+    )
+    platform_block_cta = models.CharField(
+        blank=True,
+        verbose_name="Text du bouton",
+        max_length=32,
+        default="Voir la plateforme",
+    )
+
+    platform_block_image = models.ForeignKey(
+        "wagtailimages.Image",
+        verbose_name="Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    # TODO Chiffres clès 
+    
+    contact_block_title = models.CharField(
+        blank=True,
+        verbose_name="Titre",
+        max_length=64,
+        default="Conactez-nous",
+    )
+    contact_block_description = models.CharField(
+        blank=True,
+        verbose_name="Description",
+        max_length=256,
+    )
+    contact_block_cta = models.CharField(
+        blank=True,
+        verbose_name="Text du bouton",
+        max_length=32,
+        default="Accéde au formulaire",
+    )
+
     content_panels = BannerImagePage.content_panels + [
         FieldPanel("introduction"),
         FieldPanel("news_block_title"),
+        MultiFieldPanel(
+            [
+                FieldPanel("platform_block_title"),
+                FieldPanel("platform_block_description"),
+                FieldPanel("platform_block_cta"),
+                FieldPanel("platform_block_image"),
+            ],
+            heading="Bloc concernant la plateforme",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("contact_block_title"),
+                FieldPanel("contact_block_description"),
+                FieldPanel("contact_block_cta"),
+            ],
+            heading="Bloc Contactez-nous",
+        ),
     ]
 
     class Meta:

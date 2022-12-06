@@ -40,6 +40,19 @@
       </div>
     </div>
   </div>
+  <div class="section container">
+    <div class="columns mt-5">
+      <div class="column is-6">
+        <h2 class="title is-3 my-3">{{ page.specific.platform_block_title }}</h2>
+        {{ page.specific.platform_block_description | richtext }}
+        <a href="{{ settings.mangmap.StructureSettings.plateformUrl }}" class="button is-medium is-secondary my-5">{{ page.specific.platform_block_cta }}</a>
+      </div>
+      <div class="column is-6">
+        {% image page.specific.platform_block_image width-620 as platform_image %}
+        <img src="{{platform_image.url}}" class="fr-responsive-img" alt="" loading="lazy">
+      </div>
+    </div>
+  </div>
   <div class="has-background-secondary-light">
     <div class="container section">
       <div class="columns">
@@ -49,11 +62,11 @@
         <div class="column is-6">
           <div class="is-flex is-align-items-center is-justify-content-center" style="height: 100%">
             <div>
-              <h2 class="title is-3">{% translate "Tenez-vous informés"%}</h2>
-              <p>{% translate "Inscrivez-vous à notre newsletter pour vous tenir au courant de notre actualité."%}</p>
+              <h2 class="title is-3">{{ page.specific.contact_block_title }}</h2>
+              <p>{{ page.specific.contact_block_description }}</p>
               <div class="mt-3">
-                <a target="_blank" href="{{ settings.mangmap.NewsLetterSettings.newsLetter }}" class="button is-secondary">
-                  {% translate "Accéder au formulaire"%}
+                <a target="_blank" href="/contact" class="button is-secondary">
+                  {{ page.specific.contact_block_cta }}
                 </a>
               </div>
             </div>
