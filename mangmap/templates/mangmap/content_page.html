@@ -5,8 +5,9 @@
 {% load main_tags %}
 
 {% block content %}
-  <div class="container pt-6">
+  {% comment %} <div class="container pt-6 pb-4">
     {% include "components/breadcrumbs.html" %}
+  </div> {% endcomment %}
 
     {% if page.specific.banner_image %}
     <div class="banner-image-container p-4">
@@ -14,24 +15,12 @@
         {% image page.specific.banner_image fill-1000x400 as banner_image %}
         <img src="{{banner_image.url}}" class="fr-responsive-img" alt="">
       </div>
-      <div class="container" style="height: 100%">
-          <div class="columns" style="height: 100%; justify-content: space-between; align-items: center;">
-            <div class="column is-5 is-half-touch">
-              <div class="p-5 text-container">
-                <h1 class="title is-1 has-text-white">{{page.specific.title}}</h1>
-                <div class="is-size-5">
-                  {{ page.specific.introduction|richtext }}
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
     </div>
-    {% else %}
-    <h1 class="title is-1">{{ page.title }}</h1>
     {% endif %}
 
-
+  <div class="container pt-6">
+    {% include "components/breadcrumbs.html" %}
+    <h1 class="title is-1">{{ page.title }}</h1>
     {% include "components/free_body.html" with body=page.specific.body %}
   </div>
 {% endblock %}
