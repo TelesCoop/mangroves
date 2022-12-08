@@ -18,16 +18,17 @@ class HomePage(BannerImagePage, models.Model):
 
         context = super().get_context(request, *args, **kwargs)
         sites = Site.objects.filter(locale__language_code=current_language)
+        news = News.objects.filter(locale__language_code=current_language)
         context["n_sites"] = sites.count()
         context["n_tiles"] = sites.aggregate(n_tiles=models.Sum("tiles_nb"))["n_tiles"]
         context["disponibility_years"] = datetime.date.today().year - YEAR_Of_CREATION
-        first_news = News.objects.filter(is_mangmap=True, locale__language_code=current_language).first()
+        first_news = news.filter(is_mangmap=True).first()
         if not first_news:
-            first_news = News.objects.filter(locale__language_code=current_language).first()
+            first_news = news.first()
         if first_news:
-            news_list = [first_news] + list(News.objects.exclude(id=first_news.id)[:2])
+            news_list = [first_news] + list(news.exclude(id=first_news.id)[:2])
         else:
-            news_list = News.objects.filter(locale__language_code=current_language)[:3]
+            news_list = news[:3]
         context["news_list"] = news_list
         context["newsletter_link"] = "newsletter-link"
         return context
