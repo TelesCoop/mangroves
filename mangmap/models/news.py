@@ -6,6 +6,7 @@ from django.forms import model_to_dict
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import RichTextField
+from wagtail.core.models import TranslatableMixin
 from wagtail.images.views.serve import generate_image_url
 from wagtail.search import index
 
@@ -17,7 +18,7 @@ from mangmap.models.utils import TimeStampedModel, FreeBodyField
 from mangmap.templatetags.main_tags import news_page_url
 
 
-class News(index.Indexed, TimeStampedModel, FreeBodyField):
+class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
     name = models.CharField(verbose_name="nom", max_length=255)
     publication_date = models.DateTimeField(
         verbose_name="Date de publication",
@@ -145,7 +146,7 @@ class News(index.Indexed, TimeStampedModel, FreeBodyField):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-    class Meta:
+    class Meta(TranslatableMixin.Meta):
         verbose_name = "Actualité"
         verbose_name_plural = "Actualités"
         ordering = ["-publication_date"]

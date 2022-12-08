@@ -5,7 +5,7 @@ from taggit.models import TagBase
 from wagtail.admin.panels import FieldPanel
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
-from wagtail.core.models import Page
+from wagtail.core.models import Page, TranslatableMixin
 from wagtail.documents.models import Document
 
 from mangmap.models.utils import FreeBodyField, SIMPLE_RICH_TEXT_FIELD_FEATURE
@@ -40,22 +40,22 @@ class ContentPage(BannerImagePage, FreeBodyField):
     content_panels = BannerImagePage.content_panels + FreeBodyField.panels
 
 
-class SiteType(TagBase):
-    class Meta:
+class SiteType(TranslatableMixin, TagBase):
+    class Meta(TranslatableMixin.Meta):
         ordering = ("name",)
         verbose_name = "Type de site"
         verbose_name_plural = "Types de site"
 
 
-class ActualityType(TagBase):
-    class Meta:
+class ActualityType(TagBase, TranslatableMixin):
+    class Meta(TranslatableMixin.Meta):
         ordering = ("name",)
         verbose_name = "Type d'actualité"
         verbose_name_plural = "Types d'actualité"
 
 
-class Thematic(TagBase):
-    class Meta:
+class Thematic(TranslatableMixin, TagBase):
+    class Meta(TranslatableMixin.Meta):
         verbose_name = "Thématique"
         verbose_name_plural = "Thématiques"
 

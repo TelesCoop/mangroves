@@ -4,6 +4,7 @@ from django.forms import model_to_dict
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import RichTextField
+from wagtail.core.models import TranslatableMixin
 from wagtail.search import index
 
 from mangmap.models.country import Country, WorldZone
@@ -15,7 +16,7 @@ from mangmap.models.utils import (
 )
 
 
-class Site(index.Indexed, TimeStampedModel, FreeBodyField):
+class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
     countries = models.ManyToManyField(Country, verbose_name="Pays", blank=True)
     zones = models.ManyToManyField(WorldZone, verbose_name="Zones", blank=True)
     name = models.CharField(verbose_name="Nom", max_length=100)
@@ -135,10 +136,10 @@ class Site(index.Indexed, TimeStampedModel, FreeBodyField):
                 self.countries.add(country)
         super().save()
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.name)
+    #     super().save(*args, **kwargs)
 
     @property
     def link(self):
@@ -151,7 +152,7 @@ class Site(index.Indexed, TimeStampedModel, FreeBodyField):
     def is_download(self):
         return bool(self.file)
 
-    class Meta:
+    class Meta(TranslatableMixin.Meta):
         verbose_name_plural = "Sites"
         verbose_name = "Site"
         ordering = ("name",)

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "search",
     "wagtail_localize",
     "wagtail_localize.locales",
+    "wagtail_localize.modeladmin",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",

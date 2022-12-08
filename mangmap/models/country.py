@@ -3,10 +3,11 @@ from django.forms import model_to_dict
 from wagtail.search import index
 from wagtail.search.index import Indexed
 from wagtail.documents.models import Document
+from wagtail.core.models import TranslatableMixin
 
 
-class WorldZone(models.Model):
-    class Meta:
+class WorldZone(TranslatableMixin):
+    class Meta(TranslatableMixin.Meta):
         ordering = ("name",)
         verbose_name = "zone du monde"
         verbose_name_plural = "zones du monde"
@@ -36,8 +37,8 @@ class WorldZone(models.Model):
         return to_return
 
 
-class Country(models.Model, Indexed):
-    class Meta:
+class Country(TranslatableMixin, Indexed):
+    class Meta(TranslatableMixin.Meta):
         ordering = ("zone__name", "name")
         verbose_name = "pays"
         verbose_name_plural = "pays"

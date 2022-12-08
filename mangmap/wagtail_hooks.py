@@ -8,6 +8,7 @@ from wagtail.contrib.modeladmin.options import (
 )
 from wagtail.core import hooks
 from wagtail.contrib.modeladmin.views import EditView, CreateView
+from wagtail_localize.modeladmin.options import TranslatableModelAdmin
 
 from mangmap.models.country import WorldZone, Country
 from mangmap.models.models import Thematic, ActualityType, SiteType
@@ -42,7 +43,7 @@ class RelatedCountriesCreateView(CreateView):
         return to_return
 
 
-class SiteModelAdmin(ModelAdmin):
+class SiteModelAdmin(TranslatableModelAdmin):
     model = Site
     menu_label = "Sites"
     menu_icon = "folder-inverse"
@@ -53,7 +54,7 @@ class SiteModelAdmin(ModelAdmin):
     create_view_class = RelatedCountriesCreateView
 
 
-class ThematicModelAdmin(ModelAdmin):
+class ThematicModelAdmin(TranslatableModelAdmin):
     model = Thematic
     menu_label = "Thématiques"
     menu_icon = "tag"
@@ -66,7 +67,7 @@ class ThematicModelAdmin(ModelAdmin):
     ]
 
 
-class SiteTypeModelAdmin(ModelAdmin):
+class SiteTypeModelAdmin(TranslatableModelAdmin):
     model = SiteType
     menu_label = "Types de site"
     menu_icon = "tag"
@@ -81,7 +82,7 @@ class SitesAdminGroup(ModelAdminGroup):
     items = (SiteModelAdmin, ThematicModelAdmin, SiteTypeModelAdmin)
 
 
-class NewsModelAdmin(ModelAdmin):
+class NewsModelAdmin(TranslatableModelAdmin):
     model = News
     menu_label = "Actualités"
     menu_icon = "folder-inverse"
@@ -92,7 +93,7 @@ class NewsModelAdmin(ModelAdmin):
     create_view_class = RelatedCountriesCreateView
 
 
-class ActualityTypeModelAdmin(ModelAdmin):
+class ActualityTypeModelAdmin(TranslatableModelAdmin):
     model = ActualityType
     menu_label = "Types d'actualité"
     menu_icon = "tag"
@@ -107,7 +108,7 @@ class ActualityAdminGroup(ModelAdminGroup):
     items = (NewsModelAdmin, ActualityTypeModelAdmin)
 
 
-class WorldZoneModelAdmin(ModelAdmin):
+class WorldZoneModelAdmin(TranslatableModelAdmin):
     model = WorldZone
     menu_label = "Zones du monde"
     menu_icon = "site"
@@ -115,7 +116,7 @@ class WorldZoneModelAdmin(ModelAdmin):
     search_fields = ("name",)
 
 
-class CountryModelAdmin(ModelAdmin):
+class CountryModelAdmin(TranslatableModelAdmin):
     model = Country
     menu_label = "Pays"
     menu_icon = "site"
