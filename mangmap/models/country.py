@@ -1,9 +1,12 @@
+from functools import cached_property
 from django.db import models
 from django.forms import model_to_dict
+from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 from wagtail.search.index import Indexed
 from wagtail.documents.models import Document
 from wagtail.core.models import TranslatableMixin
+from mangmap.models.utils import LocalizedSelectPanel, get_orignal
 
 class WorldZone(TranslatableMixin):
     class Meta(TranslatableMixin.Meta):
@@ -52,6 +55,22 @@ class Country(TranslatableMixin, Indexed):
         index.SearchField("name", partial_match=True),
         index.SearchField("code", partial_match=True),
     ]
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("code"),
+        FieldPanel("latitude"),
+        FieldPanel("longitude"),
+        LocalizedSelectPanel("zone"),
+    ]
+
+    # @cached_property
+    # def original(self):
+    #     return get_orignal(self)
+
+    # @property
+    # def original_zone(self):
+    #     return self.original.zone
 
     def __str__(self):
         if self.zone:

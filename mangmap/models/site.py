@@ -1,5 +1,6 @@
 from django import forms
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.forms import model_to_dict
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
@@ -13,6 +14,7 @@ from mangmap.models.utils import (
     TimeStampedModel,
     SIMPLE_RICH_TEXT_FIELD_FEATURE,
     FreeBodyField,
+    LocalizedSelectPanel
 )
 
 
@@ -38,12 +40,6 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
         verbose_name="Thématique principale",
         help_text="ce champ n'est utilisé que lorsque plusieurs thématiques sont sélectionnées",
     )
-    geo_dev_creation = models.BooleanField(
-        default=False, verbose_name="Créé par mangmap ?"
-    )
-    source_name = models.CharField(
-        verbose_name="Producteur de la site", max_length=100, blank=True
-    )
     source_link = models.CharField(
         verbose_name="Lien vers la Site (URL)", max_length=200, blank=True
     )
@@ -61,20 +57,27 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
         max_length=1000,
     )
     types = models.ManyToManyField(SiteType, blank=True)
+    tiles_nb = models.IntegerField(default=0, verbose_name="Nombre de tuiles")
+    coastline_coverage = models.IntegerField(
+        # MinValueValidator(0), 
+        # MaxValueValidator(100), 
+        default=0, 
+        verbose_name="Pourcentage de couverture du littoral",
+    )
 
     panels = [
         FieldPanel("name"),
         FieldPanel("slug"),
         FieldPanel("short_description"),
-        FieldPanel("source_name"),
+        FieldPanel("tiles_nb"),
+        FieldPanel("coastline_coverage"),
         FieldPanel("source_link"),
         FieldPanel("file"),
         FieldPanel("body"),
-        FieldPanel("types", widget=forms.CheckboxSelectMultiple),
-        FieldPanel("thematics", widget=forms.CheckboxSelectMultiple),
-        FieldPanel("geo_dev_creation"),
-        FieldPanel("zones", widget=forms.CheckboxSelectMultiple),
-        FieldPanel("countries", widget=forms.SelectMultiple),
+        LocalizedSelectPanel("zones", widget=forms.CheckboxSelectMultiple),
+        LocalizedSelectPanel("countries", widget=forms.SelectMultiple),
+        LocalizedSelectPanel("types", widget=forms.CheckboxSelectMultiple),
+        LocalizedSelectPanel("thematics", widget=forms.CheckboxSelectMultiple),
     ]
 
     def to_dict(self):
@@ -85,9 +88,9 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
                 "name",
                 "slug",
                 "thematics",
-                "geo_dev_creation",
-                "source_name",
                 "short_description",
+                "tiles_nb",
+                "coastline_coverage",
             ],
         )
         to_return["thematics"] = [thematic.slug for thematic in self.thematics.all()]

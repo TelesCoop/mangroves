@@ -60,13 +60,6 @@
       </div>
 
       <div class="card-footer" style="flex-direction: column; padding: 24px; border: none;">
-        <div>
-          <span v-if="site.source_name">
-            <span class="icon"><img src="{% static 'img/source.svg' %}"
-                                    style="width: 12px; height: 12px;"></span>
-            Source : [[ site.source_name ]]
-          </span>
-        </div>
         <a :href="[[ site.link ]]"
            :download="site.is_download ? site.download_name : null"
            :target="site.is_download ? '_self' : '_blank'">

@@ -14,7 +14,7 @@ from mangmap.models.country import Country, WorldZone
 from mangmap.models.models import ActualityType
 from mangmap.models.models import Thematic
 from mangmap.models.site import Site
-from mangmap.models.utils import TimeStampedModel, FreeBodyField
+from mangmap.models.utils import TimeStampedModel, FreeBodyField, LocalizedSelectPanel
 from mangmap.templatetags.main_tags import news_page_url
 
 
@@ -91,12 +91,12 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
         FieldPanel("introduction"),
         FieldPanel("is_mangmap"),
         FieldPanel("body"),
-        FieldPanel("types", widget=forms.CheckboxSelectMultiple),
+        LocalizedSelectPanel("types", widget=forms.CheckboxSelectMultiple),
         FieldPanel("is_global"),
-        FieldPanel("zones", widget=forms.CheckboxSelectMultiple),
-        FieldPanel("countries", widget=forms.SelectMultiple),
-        FieldPanel("thematics", widget=forms.CheckboxSelectMultiple),
-        FieldPanel("sites", widget=forms.SelectMultiple),
+        LocalizedSelectPanel("zones", widget=forms.CheckboxSelectMultiple),
+        LocalizedSelectPanel("countries", widget=forms.SelectMultiple),
+        LocalizedSelectPanel("thematics", widget=forms.CheckboxSelectMultiple),
+        LocalizedSelectPanel("sites", widget=forms.SelectMultiple),
     ]
 
     def __str__(self):

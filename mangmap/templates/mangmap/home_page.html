@@ -52,6 +52,33 @@
         <img src="{{platform_image.url}}" class="fr-responsive-img" alt="" loading="lazy">
       </div>
     </div>
+    {# Figures #}
+    <div class="figures">
+      {{ page.specific.key_figures_introduction | richtext }}
+      <div class="figures-list mt-6">
+        <div>
+          <span class="icon has-text-secondary">
+            {% include "components/icon.html" with size="120" name="pin-distance" %}
+          </span>
+          <p class="is-uppercase figure">{{ n_sites }}</p>
+          <p>{{ page.specific.key_figures_sites_nb_title }}</p>
+        </div>
+        <div>
+          <span class="icon has-text-secondary">
+            {% include "components/icon.html" with size="120" name="stack" %}
+          </span>
+          <p class="is-uppercase figure">{{ n_tiles }}</p>
+          <p>{{ page.specific.key_figures_tiles_nb_title }}</p>
+        </div>
+        <div>
+          <span class="icon has-text-secondary">
+            {% include "components/icon.html" with size="120" name="calendar-2" %}
+          </span>
+          <p class="is-uppercase figure">{{ disponibility_years }}</p>
+          <p>{{ page.specific.key_figures_year }}</p>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="has-background-secondary-light">
     <div class="container section">

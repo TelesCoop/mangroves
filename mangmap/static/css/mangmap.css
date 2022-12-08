@@ -143,3 +143,22 @@
     /* Secondary color with transparency */
     background-color: #61923d96;
 }
+
+.figures {
+    text-align: center;
+    max-width: 850px;
+    margin: auto;
+}
+
+.figures-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    row-gap: 1.5rem;
+}
+
+.figures-list .figure {
+    font-weight: 900;
+    font-size: 2.5em;
+}

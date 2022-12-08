@@ -1,8 +1,10 @@
-from django.contrib.auth.models import User
+import datetime
 from django.db import models
+from django.utils import translation
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.core.fields import RichTextField
 from mangmap.models.models import BannerImagePage
+from mangmap.constants import YEAR_Of_CREATION
 
 
 class HomePage(BannerImagePage, models.Model):
@@ -12,17 +14,20 @@ class HomePage(BannerImagePage, models.Model):
     def get_context(self, request, *args, **kwargs):
         from mangmap.models.site import Site
         from mangmap.models.news import News
+        current_language = translation.get_language()
 
         context = super().get_context(request, *args, **kwargs)
-        context["n_sites"] = Site.objects.count()
-        context["n_members"] = User.objects.count()
-        first_news = News.objects.filter(is_mangmap=True).first()
+        sites = Site.objects.filter(locale__language_code=current_language)
+        context["n_sites"] = sites.count()
+        context["n_tiles"] = sites.aggregate(n_tiles=models.Sum("tiles_nb"))["n_tiles"]
+        context["disponibility_years"] = datetime.date.today().year - YEAR_Of_CREATION
+        first_news = News.objects.filter(is_mangmap=True, locale__language_code=current_language).first()
         if not first_news:
-            first_news = News.objects.filter().first()
+            first_news = News.objects.filter(locale__language_code=current_language).first()
         if first_news:
             news_list = [first_news] + list(News.objects.exclude(id=first_news.id)[:2])
         else:
-            news_list = News.objects.all()[:3]
+            news_list = News.objects.filter(locale__language_code=current_language)()[:3]
         context["news_list"] = news_list
         context["newsletter_link"] = "newsletter-link"
         return context
@@ -71,7 +76,29 @@ class HomePage(BannerImagePage, models.Model):
         related_name="+",
     )
 
-    # TODO Chiffres clès 
+    key_figures_introduction = RichTextField(
+        features=SIMPLE_RICH_TEXT_FIELD_FEATURE + ["h2", "h3", "h4", "ol", "ul"],
+        verbose_name="Introduction",
+        default="Quelques chiffres clés",
+    )
+    key_figures_sites_nb_title = models.CharField(
+        blank=True,
+        verbose_name="Titre pour le nombre de site mangroves",
+        max_length=64,
+        default="Nombre de sites",
+    )
+    key_figures_tiles_nb_title = models.CharField(
+        blank=True,
+        verbose_name="Titre pour le nombre de tuiles",
+        max_length=64,
+        default="Nombre de tuiles",
+    )
+    key_figures_year = models.CharField(
+        blank=True,
+        verbose_name="Titre pour les années disponibles",
+        max_length=64,
+        default="Années disponibles",
+    )
     
     contact_block_title = models.CharField(
         blank=True,
@@ -102,6 +129,15 @@ class HomePage(BannerImagePage, models.Model):
                 FieldPanel("platform_block_image"),
             ],
             heading="Bloc concernant la plateforme",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("key_figures_introduction"),
+                FieldPanel("key_figures_sites_nb_title"),
+                FieldPanel("key_figures_tiles_nb_title"),
+                FieldPanel("key_figures_year"),
+            ],
+            heading="Bloc des chiffres clés",
         ),
         MultiFieldPanel(
             [
