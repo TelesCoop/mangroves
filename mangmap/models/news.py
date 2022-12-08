@@ -28,7 +28,6 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
     slug = models.SlugField(
         max_length=100,
         verbose_name="Slug (URL de l'actualité)",
-        unique=True,
         blank=True,
         default="",
         help_text="ce champ est rempli automatiquement s'il est laissé vide",

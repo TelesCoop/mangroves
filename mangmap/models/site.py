@@ -22,8 +22,7 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
     name = models.CharField(verbose_name="Nom", max_length=100)
     slug = models.SlugField(
         max_length=100,
-        verbose_name="Slug (URL de la site)",
-        unique=True,
+        verbose_name="Slug (URL du site)",
         blank=True,
         default="",
         help_text="ce champ est rempli automatiquement s'il est laissé vide",
@@ -136,10 +135,10 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
                 self.countries.add(country)
         super().save()
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         self.slug = slugify(self.name)
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     @property
     def link(self):

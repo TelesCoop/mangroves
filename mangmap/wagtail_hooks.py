@@ -7,7 +7,7 @@ from wagtail.contrib.modeladmin.options import (
     modeladmin_register,
 )
 from wagtail.core import hooks
-from wagtail.contrib.modeladmin.views import EditView, CreateView
+from wagtail_localize.modeladmin.views import TranslatableEditView, TranslatableCreateView
 from wagtail_localize.modeladmin.options import TranslatableModelAdmin
 
 from mangmap.models.country import WorldZone, Country
@@ -24,7 +24,7 @@ def global_admin_css():
     )
 
 
-class RelatedCountriesEditView(EditView):
+class RelatedCountriesEditView(TranslatableEditView):
     def dispatch(self, request, *args, **kwargs):
         to_return = super().dispatch(request, *args, **kwargs)
         instance: Site = self.instance
@@ -32,7 +32,7 @@ class RelatedCountriesEditView(EditView):
         return to_return
 
 
-class RelatedCountriesCreateView(CreateView):
+class RelatedCountriesCreateView(TranslatableCreateView):
     def dispatch(self, request, *args, **kwargs):
         to_return = super().dispatch(request, *args, **kwargs)
         try:

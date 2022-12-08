@@ -1,7 +1,7 @@
 from typing import List
 
+from django.utils.text import slugify
 from django.db import models
-from taggit.models import TagBase
 from wagtail.admin.panels import FieldPanel
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
@@ -39,22 +39,44 @@ class ContentPage(BannerImagePage, FreeBodyField):
 
     content_panels = BannerImagePage.content_panels + FreeBodyField.panels
 
+class Tag(models.Model):
+    name = models.CharField(
+        verbose_name="Nom", max_length=100
+    )
+    slug = models.SlugField(
+        verbose_name="Slug",
+        max_length=100,
+        allow_unicode=True,
+        blank=True,
+        help_text="ce champ est rempli automatiquement s'il est laissé vide",
+    )
 
-class SiteType(TranslatableMixin, TagBase):
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+class SiteType(TranslatableMixin, Tag):
     class Meta(TranslatableMixin.Meta):
         ordering = ("name",)
         verbose_name = "Type de site"
         verbose_name_plural = "Types de site"
 
 
-class ActualityType(TagBase, TranslatableMixin):
+class ActualityType(TranslatableMixin, Tag):
     class Meta(TranslatableMixin.Meta):
         ordering = ("name",)
         verbose_name = "Type d'actualité"
         verbose_name_plural = "Types d'actualité"
 
 
-class Thematic(TranslatableMixin, TagBase):
+class Thematic(TranslatableMixin, Tag):
     class Meta(TranslatableMixin.Meta):
         verbose_name = "Thématique"
         verbose_name_plural = "Thématiques"

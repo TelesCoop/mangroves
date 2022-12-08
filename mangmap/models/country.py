@@ -5,7 +5,6 @@ from wagtail.search.index import Indexed
 from wagtail.documents.models import Document
 from wagtail.core.models import TranslatableMixin
 
-
 class WorldZone(TranslatableMixin):
     class Meta(TranslatableMixin.Meta):
         ordering = ("name",)
