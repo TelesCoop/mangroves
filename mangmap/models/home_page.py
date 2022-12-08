@@ -27,7 +27,7 @@ class HomePage(BannerImagePage, models.Model):
         if first_news:
             news_list = [first_news] + list(News.objects.exclude(id=first_news.id)[:2])
         else:
-            news_list = News.objects.filter(locale__language_code=current_language)()[:3]
+            news_list = News.objects.filter(locale__language_code=current_language)[:3]
         context["news_list"] = news_list
         context["newsletter_link"] = "newsletter-link"
         return context
