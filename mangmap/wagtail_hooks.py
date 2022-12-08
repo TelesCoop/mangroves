@@ -24,23 +24,23 @@ def global_admin_css():
     )
 
 
-class RelatedCountriesEditView(TranslatableEditView):
-    def dispatch(self, request, *args, **kwargs):
-        to_return = super().dispatch(request, *args, **kwargs)
-        instance: Site = self.instance
-        instance.add_countries_from_zone()
-        return to_return
+# class RelatedCountriesEditView(TranslatableEditView):
+#     def dispatch(self, request, *args, **kwargs):
+#         to_return = super().dispatch(request, *args, **kwargs)
+#         instance: Site = self.instance
+#         instance.add_countries_from_zone()
+#         return to_return
 
 
-class RelatedCountriesCreateView(TranslatableCreateView):
-    def dispatch(self, request, *args, **kwargs):
-        to_return = super().dispatch(request, *args, **kwargs)
-        try:
-            instance: Site = self.get_instance()
-            instance.add_countries_from_zone()
-        except ValueError:
-            pass
-        return to_return
+# class RelatedCountriesCreateView(TranslatableCreateView):
+#     def dispatch(self, request, *args, **kwargs):
+#         to_return = super().dispatch(request, *args, **kwargs)
+#         try:
+#             instance: Site = self.get_instance()
+#             instance.add_countries_from_zone()
+#         except ValueError:
+#             pass
+#         return to_return
 
 
 class SiteModelAdmin(TranslatableModelAdmin):
@@ -50,8 +50,8 @@ class SiteModelAdmin(TranslatableModelAdmin):
     add_to_settings_menu = False
     search_fields = ("name",)
 
-    edit_view_class = RelatedCountriesEditView
-    create_view_class = RelatedCountriesCreateView
+    # edit_view_class = RelatedCountriesEditView
+    # create_view_class = RelatedCountriesCreateView
 
 
 class ThematicModelAdmin(TranslatableModelAdmin):
@@ -89,8 +89,8 @@ class NewsModelAdmin(TranslatableModelAdmin):
     add_to_settings_menu = False
     search_fields = ("name",)
 
-    edit_view_class = RelatedCountriesEditView
-    create_view_class = RelatedCountriesCreateView
+    # edit_view_class = RelatedCountriesEditView
+    # create_view_class = RelatedCountriesCreateView
 
 
 class ActualityTypeModelAdmin(TranslatableModelAdmin):
