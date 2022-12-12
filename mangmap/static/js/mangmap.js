@@ -12,3 +12,8 @@ function updateNavbarSuccinctStatus() {
 }
 
 window.addEventListener('scroll', updateNavbarSuccinctStatus);
+
+function toggleMenu() {
+    navbarBurger = document.getElementById("navbar-burger").classList.toggle("is-active");
+    navbarMenu = document.getElementById("navbar-menu").classList.toggle("is-active");
+}
