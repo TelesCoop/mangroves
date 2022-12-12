@@ -158,6 +158,11 @@
     row-gap: 1.5rem;
 }
 
+.figures-list .figure-container {
+    margin: auto;
+    padding: 0 1rem;
+}
+
 .figures-list .figure {
     font-weight: 900;
     font-size: 2.5em;

@@ -2,7 +2,7 @@ from typing import List
 
 from django.utils.text import slugify
 from django.db import models
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.core.models import Page, TranslatableMixin
@@ -37,7 +37,22 @@ class ContentPage(BannerImagePage, FreeBodyField):
 
     subpage_types: List[str] = ["ContentPage"]
 
+    show_in_footer = models.BooleanField(
+        verbose_name="Faire apparaître dans le bas de page",
+        default=False,
+        help_text=
+            "Si un lien vers cette page devra apparaître dans le bas de page"
+        ,
+    )
+
     content_panels = BannerImagePage.content_panels + FreeBodyField.panels
+
+    promote_panels = Page.promote_panels + [
+        MultiFieldPanel([
+            FieldPanel("show_in_footer"),
+        ]
+        , heading="Pour le bas de page du site"),
+    ]
 
 class Tag(models.Model):
     name = models.CharField(
@@ -119,19 +134,6 @@ class AnalyticsScriptSetting(BaseSetting):
 
     class Meta:
         verbose_name = "Script de suivi du traffic"
-
-
-@register_setting
-class NewsLetterSettings(BaseSetting):
-    newsLetter = models.URLField(
-        help_text="Lien d'inscription à la lettre d'information",
-        max_length=300,
-        blank=True,
-        null=True,
-    )
-
-    class Meta:
-        verbose_name = "Inscription à la lettre d'information"
 
 
 class Contact(models.Model):

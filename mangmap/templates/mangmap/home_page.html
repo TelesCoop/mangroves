@@ -56,21 +56,21 @@
     <div class="figures">
       {{ page.specific.key_figures_introduction | richtext }}
       <div class="figures-list mt-6">
-        <div>
+        <div class="figure-container">
           <span class="icon has-text-secondary">
             {% include "components/icon.html" with size="120" name="pin-distance" %}
           </span>
           <p class="is-uppercase figure">{{ n_sites }}</p>
           <p>{{ page.specific.key_figures_sites_nb_title }}</p>
         </div>
-        <div>
+        <div class="figure-container">
           <span class="icon has-text-secondary">
             {% include "components/icon.html" with size="120" name="stack" %}
           </span>
           <p class="is-uppercase figure">{{ n_tiles }}</p>
           <p>{{ page.specific.key_figures_tiles_nb_title }}</p>
         </div>
-        <div>
+        <div class="figure-container">
           <span class="icon has-text-secondary">
             {% include "components/icon.html" with size="120" name="calendar-2" %}
           </span>

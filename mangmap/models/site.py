@@ -1,6 +1,5 @@
 from django import forms
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.forms import model_to_dict
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
@@ -58,11 +57,8 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
     )
     types = models.ManyToManyField(SiteType, blank=True)
     tiles_nb = models.IntegerField(default=0, verbose_name="Nombre de tuiles")
-    coastline_coverage = models.IntegerField(
-        # MinValueValidator(0), 
-        # MaxValueValidator(100), 
-        default=0, 
-        verbose_name="Pourcentage de couverture du littoral",
+    coastline_coverage = models.CharField(
+        verbose_name="Couverture du littoral", max_length=8, blank=True
     )
 
     panels = [

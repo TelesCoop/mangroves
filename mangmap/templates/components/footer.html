@@ -3,44 +3,54 @@
 <footer class="footer">
   <div class="container">
     <div class="columns-widescreen is-justify-content-space-between">
-      <div class="column is-4 is-flex is-align-items-center desktop is-flex-direction-column-until-widescreen"
+      <div class="column is-3 is-flex is-align-items-center desktop is-flex-direction-column-until-widescreen"
            style="margin: auto">
         <img src="{% static 'img/mangmap/logo_couleur.svg' %}" width="206" height="38">
       </div>
-      <div class="column is-8 is-flex is-align-items-center desktop is-flex-direction-column-until-widescreen"
+      <div class="column is-9 desktop is-flex is-align-items-center is-justify-content-center  is-flex-direction-column-until-widescreen"
            style="margin: auto">
-        <a href="/mentions-legales" class="button is-small is-text">{% translate "Mentions légales" %}</a>
-        <a href="/donnees-personnelles" class="button is-small is-text">{% translate "Données personnelles" %}</a>
+        {% for child_page in home_page.get_children.live %}
+          {% if child_page.specific.show_in_footer %}
+            <a href="{{ child_page.url }}" class="button is-small is-text">{{ child_page.title }}</a>
+          {% endif %}
+        {% endfor %}
         <a href="/admin" class="button is-small is-text">{% translate "intranet" %}</a>
-        <a href="/contact/?review=1" class="button is-small is-text">{% translate "Je donne mon avis sur ce site" %}</a>
+        <a href="/contact/?review=1" class="button is-small is-text">{% translate "Je donne mon avis" %}</a>
+        <a href="https://www.linkedin.com/company/artgeodev" class="button is-small is-text" target="_blank">
+          <span>{% translate "Suivez-nous" %}</span>
+          <span class="icon mb-2">
+            {% include "components/icon.html" with size="20" name="linkedin-box" %}
+          </span>
+        </a>
       </div>
+
       
     </div>
     <div class="columns-widescreen is-justify-content-space-between">
-      <div class="column is-4 is-flex is-align-items-center desktop is-flex-direction-column-until-widescreen">
+      <div class="column is-3 is-flex is-align-items-center desktop is-flex-direction-column-until-widescreen" style="margin: auto">
         <p class="is-size-7">
           <a href="http://telescoop.fr/">{% translate "Développé par" %} <span style="text-decoration: underline">TelesCoop</span></a>
         </p>
       </div>
-      <div class="column is-flex is-8 is-justify-content-center footer-logos is-align-items-center">
+      <div class="column is-flex is-9 is-justify-content-center is-flex-wrap-wrap footer-logos is-align-items-center" style="margin: auto">
         <a href="https://www.ird.fr/" target="_blank">
-          <img src="{% static 'img/partners/1_logo-IRD.png' %}" alt="Soutenu par l'IRD (Institut de Recherche pour le Développement)" width="80" height="65">
+          <img src="{% static 'img/partners/1_logo-IRD.png' %}" alt="Soutenu par l'IRD (Institut de Recherche pour le Développement)" width="95">
         </a>
         <a href="https://www.espace-dev.fr/">
-          <img src="{% static 'img/partners/2_logo-espace-dev.png' %}" alt="Soutenu par l'espace dev (Observation spacial, modèle & science impliquée)" width="140"
-               height="41">
+          <img src="{% static 'img/partners/2_logo-espace-dev.png' %}" alt="Soutenu par l'espace dev (Observation spacial, modèle & science impliquée)" width="170">
         </a>
-        <img src="{% static 'img/partners/3_logo-univ-montpellier.png' %}"
-             width="130" height="75"
-             alt="Soutenu par l'Université de Montpellier">
+        <a href="https://www.umontpellier.fr/">
+          <img src="{% static 'img/partners/3_logo-univ-montpellier.png' %}" alt="Soutenu par l'Université de Montpellier" width="140">
+        </a>
+             
         <a href="https://www.latelescop.fr/" target="_blank">
-          <img src="{% static 'img/partners/4_laTeleScop-Log.png' %}" alt="Soutenu par la TeleScop" width="120" height="65">
+          <img src="{% static 'img/partners/4_laTeleScop-Log.png' %}" alt="Soutenu par la TeleScop" width="130">
         </a>
         <a href="https://cnes.fr/fr/" target="_blank">
-          <img src="{% static 'img/partners/5_logo-CNES.png' %}" alt="Soutenu par le CNES (Centre national d'études spéciales)" width="62" height="65">
+          <img src="{% static 'img/partners/5_logo-CNES.png' %}" alt="Soutenu par le CNES (Centre national d'études spéciales)" width="70">
         </a>
         <a href="https://www.spaceclimateobservatory.org/" target="_blank">
-          <img src="{% static 'img/partners/6_logo-SCO.png' %}" alt="Soutenu par la SCO (Space climate observatory)" width="85" height="65">
+          <img src="{% static 'img/partners/6_logo-SCO.png' %}" alt="Soutenu par la SCO (Space climate observatory)" width="90">
         </a>
       </div>
     </div>

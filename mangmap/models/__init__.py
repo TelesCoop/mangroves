@@ -4,7 +4,6 @@ from .models import (  # noqa: F401
     ContentPage,
     Thematic,
     ActualityType,
-    NewsLetterSettings,
     AnalyticsScriptSetting,
     StructureSettings
 )
