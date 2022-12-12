@@ -217,22 +217,31 @@
                               .join(", ");
                           elementTop.appendChild(topLeft);
                           elementContent.appendChild(elementTop);
-                          var titleLink = document.createElement("a");
-                          titleLink.href = site.link;
                           var elementTitle = document.createElement("h3");
                           elementTitle.innerText = site.name;
                           elementTitle.className = "title is-5 has-text-weight-bold mb-4";
-                          titleLink.appendChild(elementTitle);
-                          elementContent.appendChild(titleLink);
+                          elementContent.appendChild(elementTitle);
                           var elementIntro = document.createElement("p");
                           elementIntro.innerHTML = site.short_description_max_250;
                           elementContent.appendChild(elementIntro);
-                          var elementButton = document.createElement("a");
-                          elementButton.href = site.link;
-                          elementButton.target = "_blank"
-                          elementButton.className = "button is-secondary";
-                          elementButton.innerText = "Accéder à la site";
-                          elementContent.appendChild(elementButton);
+                          if (site.link) {
+                              var elementButton = document.createElement("a");
+                              elementButton.href = site.link;
+                              elementButton.target = "_blank"
+                              elementButton.className = "button is-secondary";
+                              // TODO : Traduction !! 
+                              elementButton.innerText = "Accéder au lien du site";
+                              elementContent.appendChild(elementButton);
+                          }
+
+                          // TODO : Traduction !! 
+                          var tuileNbElement = document.createElement("p");
+                          tuileNbElement.className = "mt-2";
+                          tuileNbElement.innerHTML = "<b>Nombre de tuiles : </b>" + site.tiles_nb;
+                          var coverageElement = document.createElement("p");
+                          coverageElement.innerHTML = "<b>Couverture du littoral : </b>" + site.coastline_coverage;
+                          elementContent.appendChild(tuileNbElement);
+                          elementContent.appendChild(coverageElement);
 
                           element.appendChild(elementContent);
                           sitesHolder.appendChild(element);

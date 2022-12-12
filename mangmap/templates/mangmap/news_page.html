@@ -32,7 +32,7 @@
 
   {% if news.sites.count %}
     <div class="container section">
-      <h2 class="title is-2 has-text-centered">{% translate "Sites consernés" %}</h2>
+      <h2 class="title is-2 has-text-centered">{% translate "Sites concernés" %}</h2>
       <div class="card-holder">
         {% for site in news.sites.all %}
           {% include "components/site_card.html" with site=site %}
