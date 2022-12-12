@@ -29,8 +29,8 @@ def paragraph_block(additional_field, required):
 
 SIMPLE_RICH_TEXT_FIELD_FEATURE = ["bold", "italic", "link"]
 COLOR_CHOICES = (
-    ("blue-light", "Bleue"),
-    ("secondary-light", "Rose"),
+    ("primary-light", "Bleue"),
+    ("secondary-light", "Verte"),
     ("white", "Blanche"),
     ("", "Sans couleur"),
 )
@@ -55,6 +55,12 @@ class FreeBodyField(models.Model):
             required=False,
         ),
     )
+    image_block = (
+        "image",
+        ImageChooserBlock(
+            label="Image à côté du paragraphe", required=False
+        ),
+    )
 
     body = StreamField(
         [
@@ -69,12 +75,7 @@ class FreeBodyField(models.Model):
                     [
                         paragraph_block(["h2"], True),
                         color_block,
-                        (
-                            "image",
-                            ImageChooserBlock(
-                                label="Image à côté du paragraphe", required=False
-                            ),
-                        ),
+                        image_block,
                         (
                             "position",
                             blocks.ChoiceBlock(
@@ -92,14 +93,14 @@ class FreeBodyField(models.Model):
                                 blocks.StructBlock(
                                     [
                                         color_block,
-                                        paragraph_block([], False),
+                                        paragraph_block(["image"], False),
                                         (
                                             "columns",
                                             blocks.ListBlock(
                                                 blocks.StructBlock(
                                                     [
                                                         color_block,
-                                                        paragraph_block([], False),
+                                                        paragraph_block(["image"], False),
                                                     ],
                                                     label="Colonne",
                                                 ),
