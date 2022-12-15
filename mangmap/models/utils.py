@@ -92,6 +92,7 @@ class FreeBodyField(models.Model):
                             blocks.ListBlock(
                                 blocks.StructBlock(
                                     [
+                                        ("without_margin_top", blocks.BooleanBlock(label="Retirer la marge du dessus", default=False, required=False)),
                                         color_block,
                                         paragraph_block(["image"], False),
                                         (

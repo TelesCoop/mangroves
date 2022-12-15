@@ -27,7 +27,11 @@
   {% endif %}
 
   {% for sub_block in block.value.sub_section %}
-    <div class="section {% if sub_block.color %}has-background-{{ sub_block.color }}{% else %}px-0{% endif %}">
+    <div class="
+      section 
+      {% if sub_block.color %}has-background-{{ sub_block.color }}{% else %}px-0{% endif %} 
+      {% if sub_block.without_margin_top %}pt-0{% endif %} "
+      >
       {% include_block sub_block.paragraph %}
       {% if sub_block.columns %}
         <div class="columns">
