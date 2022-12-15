@@ -46,7 +46,9 @@
     <div class="columns mt-5">
       <div class="column is-6">
         <h2 class="title is-3 my-3">{{ page.specific.platform_block_title }}</h2>
-        {{ page.specific.platform_block_description | richtext }}
+        <div class="rich-text">
+          {{ page.specific.platform_block_description | richtext }}
+        </div>
         <a href="{{ settings.mangmap.StructureSettings.plateformUrl }}" class="button is-medium is-secondary my-5">{{ page.specific.platform_block_cta }}</a>
       </div>
       <div class="column is-6">
@@ -55,8 +57,10 @@
       </div>
     </div>
     {# Figures #}
-    <div class="figures">
-      {{ page.specific.key_figures_introduction | richtext }}
+    <div class="figures mt-6">
+      <div class="rich-text">
+        {{ page.specific.key_figures_introduction | richtext }}
+      </div>
       <div class="figures-list mt-6">
         <div class="figure-container">
           <span class="icon has-text-secondary">
