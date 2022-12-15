@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import translation
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.core.fields import RichTextField
-from mangmap.models.models import BannerImagePage
+from mangmap.models.models import BannerImagePage, CustomImage
 from mangmap.constants import YEAR_Of_CREATION
 
 
@@ -69,7 +69,7 @@ class HomePage(BannerImagePage, models.Model):
     )
 
     platform_block_image = models.ForeignKey(
-        "wagtailimages.Image",
+        CustomImage,
         verbose_name="Image",
         null=True,
         blank=True,

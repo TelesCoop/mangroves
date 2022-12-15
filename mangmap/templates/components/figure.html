@@ -1,0 +1,9 @@
+
+<figure class="{{class}}" style="{{style}}">
+  <img src="{{ image.url }}" alt="" loading="lazy">
+  {% if image.image.caption %}
+  {# image here is the Rendition instense object of the Image object #}
+    <figcaption class="image-caption">{{image.image.caption}}</figcaption>
+  {% endif %}
+</figure>
+

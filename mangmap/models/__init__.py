@@ -5,7 +5,9 @@ from .models import (  # noqa: F401
     Thematic,
     ActualityType,
     AnalyticsScriptSetting,
-    StructureSettings
+    StructureSettings,
+    CustomImage,
+    CustomRendition
 )
 from .news import News  # noqa: F401
 from .site import Site  # noqa: F401

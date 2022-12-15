@@ -3,3 +3,7 @@
 <figure class="image" onclick="document.getElementById('{% image_id_from_url image.url %}').classList.add('is-active')">
   <img src="{{ image.url }}" style="max-width: 400px">
 </figure>
+{% if image.image.caption %}
+{# image here the Rendition instense object of the Image object #}
+  <div class="image-caption">{{image.image.caption}}</div>
+{% endif %}

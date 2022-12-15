@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-05 16:23+0100\n"
+"POT-Creation-Date: 2022-12-12 17:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: mangmap/models/utils.py:164
+msgid ""
+"widget_class should be a Django form widget class of type "
+"CheckboxSelectMultiple, RadioSelect, Select or SelectMultiple"
+msgstr ""
 
 #: mangmap/templates/404.html:4 mangmap/templates/404.html:10
 msgid "La page n'a pas été trouvée"
@@ -38,33 +44,25 @@ msgstr "Home"
 msgid "Actualités"
 msgstr "News"
 
-#: mangmap/templates/components/footer.html:9
-msgid "Mentions légales"
-msgstr "Legal information"
-
-#: mangmap/templates/components/footer.html:10
-msgid "Données personnelles"
-msgstr "Personal data"
-
-#: mangmap/templates/components/footer.html:11
+#: mangmap/templates/components/footer.html:17
 msgid "intranet"
-msgstr "intranet"
+msgstr "Intranet"
 
-#: mangmap/templates/components/footer.html:12
-msgid "Je donne mon avis sur ce site"
-msgstr "Feedback on this website"
+#: mangmap/templates/components/footer.html:18
+msgid "Je donne mon avis"
+msgstr "Feedback"
 
-#: mangmap/templates/components/footer.html:30
+#: mangmap/templates/components/footer.html:20
+msgid "Suivez-nous"
+msgstr "Follow us"
+
+#: mangmap/templates/components/footer.html:32
 msgid "Développé par"
 msgstr "Developed by"
 
-#: mangmap/templates/components/footer.html:31
-msgid "design par"
-msgstr "design by"
-
-#: mangmap/templates/components/navbar.html:58
+#: mangmap/templates/components/navbar.html:52
 msgid "Plateforme"
-msgstr "Plateform"
+msgstr "Platform"
 
 #: mangmap/templates/components/news_card.html:21
 #: mangmap/templates/mangmap/news_list_page.html:53
@@ -79,18 +77,24 @@ msgstr "PDF Document"
 msgid "Télécharger le PDF"
 msgstr "Download the PDF"
 
-#: mangmap/templates/components/site_card.html:54
-msgid "Source"
-msgstr "Source"
+#: mangmap/templates/components/site_card.html:28
+#: mangmap/templates/components/sites_list_view.html:44
+msgid "Nombre de tuiles :"
+msgstr "Number of tiles:"
 
-#: mangmap/templates/components/site_card.html:63
-msgid "Site"
-msgstr "Site"
+#: mangmap/templates/components/site_card.html:29
+#: mangmap/templates/components/sites_list_view.html:45
+msgid "Couverture du littoral :"
+msgstr "Coastal coverage:"
 
-#: mangmap/templates/components/site_card.html:72
-#: mangmap/templates/components/sites_list_view.html:78
+#: mangmap/templates/components/site_card.html:40
+#: mangmap/templates/components/sites_list_view.html:58
 msgid "Accéder au lien du site"
 msgstr "Go to the site link"
+
+#: mangmap/templates/components/sites_list_view.html:25
+msgid "Zone inconnue"
+msgstr "Unknown area"
 
 #: mangmap/templates/mangmap/contact_page.html:26
 msgid "Formulaire de contact"
@@ -152,26 +156,10 @@ msgstr "Message"
 msgid "J'autorise ce site à conserver mes données transmises via ce formulaire"
 msgstr "I authorize this site to keep my data transmitted via this form"
 
-#: mangmap/templates/mangmap/contact_page.html:115
-#: mangmap/templates/mangmap/home_page.html:52
-msgid "Tenez-vous informés"
-msgstr "Stay informed"
-
-#: mangmap/templates/mangmap/contact_page.html:121
-#: mangmap/templates/mangmap/home_page.html:56
-msgid "Accéder au formulaire"
-msgstr "Go to the form"
-
-#: mangmap/templates/mangmap/home_page.html:39
+#: mangmap/templates/mangmap/home_page.html:40
 #: mangmap/templates/mangmap/news_list_page.html:20
 msgid "Toutes les actualités"
 msgstr "All the news"
-
-#: mangmap/templates/mangmap/home_page.html:53
-msgid ""
-"Inscrivez-vous à notre newsletter pour vous tenir au courant de notre "
-"actualité."
-msgstr ""
 
 #: mangmap/templates/mangmap/news_list_page.html:16
 msgid "Filtrer les actualités"
@@ -186,17 +174,38 @@ msgid "Actualités recommandées"
 msgstr "Recommended news"
 
 #: mangmap/templates/mangmap/news_page.html:35
-msgid "Sites consernés"
+msgid "Sites concernés"
 msgstr "Related sites"
 
 #: mangmap/templates/mangmap/sites_page.html:11
 msgid "Les sites"
 msgstr "Sites"
 
-#: mangmap/templates/mangmap/sites_page.html:26
+#: mangmap/templates/mangmap/sites_page.html:28
 msgid "Voir la liste"
 msgstr "See the list"
 
-#: mangmap/templates/mangmap/sites_page.html:34
+#: mangmap/templates/mangmap/sites_page.html:36
 msgid "Voir sur la carte"
 msgstr "See on the map"
+
+#~ msgid "Mentions légales"
+#~ msgstr "Legal information"
+
+#~ msgid "Données personnelles"
+#~ msgstr "Personal data"
+
+#~ msgid "design par"
+#~ msgstr "design by"
+
+#~ msgid "Source"
+#~ msgstr "Source"
+
+#~ msgid "Site"
+#~ msgstr "Site"
+
+#~ msgid "Tenez-vous informés"
+#~ msgstr "Stay informed"
+
+#~ msgid "Accéder au formulaire"
+#~ msgstr "Go to the form"

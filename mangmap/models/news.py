@@ -11,8 +11,7 @@ from wagtail.images.views.serve import generate_image_url
 from wagtail.search import index
 
 from mangmap.models.country import Country, WorldZone
-from mangmap.models.models import ActualityType
-from mangmap.models.models import Thematic
+from mangmap.models.models import Thematic, CustomImage, ActualityType
 from mangmap.models.site import Site
 from mangmap.models.utils import TimeStampedModel, FreeBodyField, LocalizedSelectPanel
 from mangmap.templatetags.main_tags import news_page_url
@@ -34,7 +33,7 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
     )
     introduction = RichTextField(max_length=250)
     image = models.ForeignKey(
-        "wagtailimages.Image",
+        CustomImage,
         verbose_name="Miniature",
         null=True,
         blank=True,

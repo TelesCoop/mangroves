@@ -7,9 +7,7 @@
       {% if block.value.position == "left" %}
         <div class="column is-4">
           {% image block.value.image original as image %}
-          <figure class="m-0">
-            <img src="{{ image.url }}">
-          </figure>
+          {% include "components/figure.html" with image=image class="m-0" %}
         </div>
       {% endif %}
 
@@ -20,9 +18,7 @@
       {% if block.value.position == "right" %}
         <div class="column is-4">
           {% image block.value.image original as image %}
-          <figure class="m-0">
-            <img src="{{ image.url }}">
-          </figure>
+          {% include "components/figure.html" with image=image class="m-0" %}
         </div>
       {% endif %}
     </div>

@@ -6,9 +6,7 @@
     <div class="modal-background"
          onclick="document.getElementById('{% image_id_from_url image.url %}').classList.remove('is-active')"></div>
     <div class="modal-content">
-      <figure class="image">
-        <img src="{{ image.url }}">
-      </figure>
+      {% include "components/figure.html" with image=image class="m-0" %}
 
     </div>
     <button onclick="document.getElementById('{% image_id_from_url image.url %}').classList.remove('is-active')"

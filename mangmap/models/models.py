@@ -7,8 +7,26 @@ from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.core.models import Page, TranslatableMixin
 from wagtail.documents.models import Document
+from wagtail.images.models import Image, AbstractImage, AbstractRendition
 
-from mangmap.models.utils import FreeBodyField, SIMPLE_RICH_TEXT_FIELD_FEATURE
+from mangmap.models.utils import FreeBodyField
+
+
+class CustomImage(AbstractImage):
+    caption = models.TextField(verbose_name="Légende et/ou Copyright", blank=True)
+
+    admin_form_fields = Image.admin_form_fields + (
+        'caption',
+    )
+
+
+class CustomRendition(AbstractRendition):
+    image = models.ForeignKey(CustomImage, on_delete=models.CASCADE, related_name='renditions')
+
+    class Meta:
+        unique_together = (
+            ('image', 'filter_spec', 'focal_point_key'),
+        )
 
 
 class BannerImagePage(Page):
@@ -16,7 +34,7 @@ class BannerImagePage(Page):
         abstract = True
     
     banner_image = models.ForeignKey(
-        "wagtailimages.Image",
+        CustomImage,
         verbose_name="Bandeau",
         null=True,
         blank=True,

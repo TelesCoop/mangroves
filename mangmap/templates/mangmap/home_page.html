@@ -51,7 +51,7 @@
       </div>
       <div class="column is-6">
         {% image page.specific.platform_block_image width-620 as platform_image %}
-        <img src="{{platform_image.url}}" class="fr-responsive-img" alt="" loading="lazy">
+        {% include "components/figure.html" with image=platform_image class="fr-responsive-img" %}
       </div>
     </div>
     {# Figures #}
