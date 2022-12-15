@@ -1,4 +1,5 @@
 import datetime
+from functools import cached_property
 
 from django import forms
 from django.db import models
@@ -6,7 +7,7 @@ from django.forms import model_to_dict
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import RichTextField
-from wagtail.core.models import TranslatableMixin
+from wagtail.core.models import TranslatableMixin, Locale
 from wagtail.images.views.serve import generate_image_url
 from wagtail.search import index
 
@@ -101,6 +102,19 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
     def __str__(self):
         return self.name
 
+    @cached_property
+    def original(self):
+        french = Locale.objects.get(language_code="fr")
+        try:
+            return self.get_translation(french)
+        except News.DoesNotExist:
+            # If the news has never been publish and we previsualize the get_translation return a DoesNotExist
+            return self
+
+    @property
+    def original_image(self):
+        return self.original.image
+    
     @property
     def link(self):
         return news_page_url(news=self)
@@ -117,8 +131,8 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
         )
         to_return["publication_date"] = self.publication_date.strftime("%d %B %Y")
         to_return["types"] = [type_.slug for type_ in self.types.all()]
-        if self.image:
-            to_return["image_link"] = generate_image_url(self.image, "fill-432x220")
+        if self.original_image:
+            to_return["image_link"] = generate_image_url(self.original_image, "fill-432x220")
         else:
             to_return["image_link"] = None
         to_return["introduction"] = str(self.introduction)
