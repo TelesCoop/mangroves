@@ -2,6 +2,7 @@ from django import forms
 from django.db import models
 from django.forms import model_to_dict
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import TranslatableMixin

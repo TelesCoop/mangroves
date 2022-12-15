@@ -230,16 +230,15 @@
                               elementButton.target = "_blank"
                               elementButton.className = "button is-secondary";
                               // TODO : Traduction !! 
-                              elementButton.innerText = "Accéder au lien du site";
+                              elementButton.innerText = "{% translate 'Accéder au lien du site' %}";
                               elementContent.appendChild(elementButton);
                           }
 
-                          // TODO : Traduction !! 
                           var tuileNbElement = document.createElement("p");
                           tuileNbElement.className = "mt-2";
-                          tuileNbElement.innerHTML = "<b>Nombre de tuiles : </b>" + site.tiles_nb;
+                          tuileNbElement.innerHTML = "<b>{% translate 'Nombre de tuiles :' %} </b>" + site.tiles_nb;
                           var coverageElement = document.createElement("p");
-                          coverageElement.innerHTML = "<b>Couverture du littoral : </b>" + site.coastline_coverage;
+                          coverageElement.innerHTML = "<b>{% translate 'Couverture du littoral :' %} </b>" + site.coastline_coverage;
                           elementContent.appendChild(tuileNbElement);
                           elementContent.appendChild(coverageElement);
 
