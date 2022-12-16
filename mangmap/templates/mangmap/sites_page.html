@@ -195,7 +195,7 @@
                       title.className = "mb-4";
                       title.innerHTML = (
                           "<span class='has-text-weight-bold'>" + sites.length + " sites </span>"
-                          + (isShowingCountries ? 'au' : 'en')
+                          + (isShowingCountries ? "{% translate 'au' %}" : "{% translate 'en' %}")
                           + " <span class='has-text-weight-bold'>" + localityParams.name + "</span> :"
                       );
                       popupHolder.appendChild(title);

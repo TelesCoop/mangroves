@@ -1,3 +1,4 @@
+from functools import cached_property
 from django import forms
 from django.db import models
 from django.forms import model_to_dict
@@ -5,7 +6,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import RichTextField
-from wagtail.core.models import TranslatableMixin
+from wagtail.core.models import TranslatableMixin, Locale
 from wagtail.search import index
 
 from mangmap.models.country import Country, WorldZone
@@ -90,7 +91,7 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
                 "coastline_coverage",
             ],
         )
-        to_return["thematics"] = [thematic.slug for thematic in self.thematics.all()]
+        to_return["thematics"] = [thematic.slug for thematic in self.original_thematics.all()]
         to_return["is_description_long"] = (
             is_description_long := len(self.short_description) >= 250
         )
@@ -103,7 +104,7 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
             to_return["thematic"] = self.main_thematic.slug
         else:
             to_return["thematic"] = "multiple"
-        zones = {country.zone.code for country in self.countries.all() if country.zone}
+        zones = {country.zone.code for country in self.original_countries.all() if country.zone}
         if len(zones) == 1:
             to_return["zone"] = next(iter(zones))
         else:
@@ -114,8 +115,8 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
         else:
             to_return["download_name"] = None
         to_return["is_download"] = self.is_download
-        to_return["countries"] = [country.code for country in self.countries.all()]
-        to_return["types"] = [type_.slug for type_ in self.types.all()]
+        to_return["countries"] = [country.code for country in self.original_countries.all()]
+        to_return["types"] = [type_.slug for type_ in self.original_types.all()]
         return to_return
 
     def __str__(self):
@@ -139,6 +140,31 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+    @cached_property
+    def original(self):
+        french = Locale.objects.get(language_code="fr")
+        try:
+            return self.get_translation(french)
+        except Site.DoesNotExist:
+            # If the site has never been publish and we previsualize the get_translation return a DoesNotExist
+            return self
+
+    @property
+    def original_countries(self):
+        return self.original.countries
+
+    @property
+    def original_zones(self):
+        return self.original.zones
+
+    @property
+    def original_thematics(self):
+        return self.original.thematics
+
+    @property
+    def original_types(self):
+        return self.original.types
 
     @property
     def link(self):

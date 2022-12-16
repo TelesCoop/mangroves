@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-12 17:58+0100\n"
+"POT-Creation-Date: 2022-12-16 16:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: mangmap/models/utils.py:164
+#: mangmap/models/utils.py:165
 msgid ""
 "widget_class should be a Django form widget class of type "
 "CheckboxSelectMultiple, RadioSelect, Select or SelectMultiple"
@@ -79,16 +79,19 @@ msgstr ""
 
 #: mangmap/templates/components/site_card.html:28
 #: mangmap/templates/components/sites_list_view.html:44
+#: mangmap/templates/mangmap/sites_page.html:239
 msgid "Nombre de tuiles :"
 msgstr ""
 
 #: mangmap/templates/components/site_card.html:29
 #: mangmap/templates/components/sites_list_view.html:45
+#: mangmap/templates/mangmap/sites_page.html:241
 msgid "Couverture du littoral :"
 msgstr ""
 
 #: mangmap/templates/components/site_card.html:40
 #: mangmap/templates/components/sites_list_view.html:58
+#: mangmap/templates/mangmap/sites_page.html:233
 msgid "Accéder au lien du site"
 msgstr ""
 
@@ -187,4 +190,12 @@ msgstr ""
 
 #: mangmap/templates/mangmap/sites_page.html:36
 msgid "Voir sur la carte"
+msgstr ""
+
+#: mangmap/templates/mangmap/sites_page.html:198
+msgid "au"
+msgstr ""
+
+#: mangmap/templates/mangmap/sites_page.html:198
+msgid "en"
 msgstr ""
