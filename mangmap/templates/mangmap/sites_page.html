@@ -53,6 +53,12 @@
 
 {% block extra_js %}
   <script>
+    var thematics = JSON.parse('{{ thematics | escapejs }}');
+      var thematicBySlug = {};
+      thematics.forEach(function (thematic) {
+          thematicBySlug[thematic.slug] = thematic;
+      });
+      console.log("### thematicBySlug", thematicBySlug);
       var zones = JSON.parse('{{ zones | escapejs }}');
       var zoneBySlug = {};
       zones.forEach(function (zone) {
@@ -90,6 +96,7 @@
                   sites: JSON.parse('{{ sites | escapejs }}'),
                   countryParameters: countryParameters,
                   searchInput: '',
+                  thematicBySlug: thematicBySlug,
                   zoneBySlug: zoneBySlug,
                   zones: zones,
               }
