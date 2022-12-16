@@ -119,23 +119,32 @@
 
 /* TODO : make a better management of banner image */
 .banner-image-container {
+    --height-banner: 400px;
     position: relative;
-    height: 400px
+    height: var(--height-banner)
 }
 
 .banner-image-container .banner-image {
     position: absolute;
-    max-height: 400px;
+    max-height: var(--height-banner);
     width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     right: 0;
     overflow: hidden;
 }
 
+@media (max-width: 576px) {
+    .banner-image-container {
+        --height-banner: 350px;
+    }
+}
+
 .banner-image-container .banner-image img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .banner-image-container .text-container {
