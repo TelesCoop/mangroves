@@ -11,7 +11,9 @@ def news_page_url(news=None):
     current_language = translation.get_language()
 
     try:
-        news_list_page = NewsListPage.objects.get(locale__language_code=current_language)
+        news_list_page = NewsListPage.objects.get(
+            locale__language_code=current_language
+        )
     except NewsListPage.DoesNotExist:
         raise NewsListPage.DoesNotExist("A NewsListPage must be created")
 

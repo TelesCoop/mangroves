@@ -7,7 +7,7 @@ from .models import (  # noqa: F401
     AnalyticsScriptSetting,
     StructureSettings,
     CustomImage,
-    CustomRendition
+    CustomRendition,
 )
 from .news import News  # noqa: F401
 from .site import Site  # noqa: F401

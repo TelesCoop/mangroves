@@ -211,7 +211,7 @@
                       for (const site of sites) {
                           const element = document.createElement("div");
                           element.className = "card has-background-info-light";
-                          
+
                           var elementContent = document.createElement("div");
                           elementContent.className = "card-content";
                           var elementTop = document.createElement("div");
@@ -236,7 +236,7 @@
                               elementButton.href = site.link;
                               elementButton.target = "_blank"
                               elementButton.className = "button is-secondary";
-                              // TODO : Traduction !! 
+                              // TODO : Traduction !!
                               elementButton.innerText = "{% translate 'Accéder au lien du site' %}";
                               elementContent.appendChild(elementButton);
                           }

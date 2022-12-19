@@ -1,7 +1,6 @@
 from typing import List
 
 from django.core.exceptions import ValidationError
-from django.shortcuts import render
 from django.template.response import TemplateResponse
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import RichTextField

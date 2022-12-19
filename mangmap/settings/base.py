@@ -179,4 +179,4 @@ BASE_URL = "http://example.com"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-WAGTAILIMAGES_IMAGE_MODEL = 'mangmap.CustomImage'
+WAGTAILIMAGES_IMAGE_MODEL = "mangmap.CustomImage"

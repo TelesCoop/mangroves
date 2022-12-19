@@ -23,7 +23,8 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
     publication_date = models.DateTimeField(
         verbose_name="Date de publication",
         default=datetime.datetime.now,
-        help_text="Permet de trier l'ordre d'affichage dans la page des actualités",
+        help_text="Permet de trier l'ordre d'affichage \
+            dans la page des actualités",
     )
     slug = models.SlugField(
         max_length=100,
@@ -43,7 +44,8 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
     )
     is_mangmap = models.BooleanField(
         verbose_name="Est une nouvelle mangmap",
-        help_text="La première actualité mise en avant sur la page d'accueil est la dernière actualité mangmap",
+        help_text="La première actualité mise en avant sur la \
+            page d'accueil est la dernière actualité mangmap",
         default=False,
     )
     types = models.ManyToManyField(
@@ -74,9 +76,7 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
         verbose_name="Thématiques liées",
         help_text="Ce champ n'est pas encore utilisé",
     )
-    sites = models.ManyToManyField(
-        Site, blank=True, verbose_name="Sites concernés"
-    )
+    sites = models.ManyToManyField(Site, blank=True, verbose_name="Sites concernés")
 
     search_fields = [
         index.SearchField("name", partial_match=True),
@@ -108,13 +108,14 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
         try:
             return self.get_translation(french)
         except News.DoesNotExist:
-            # If the news has never been publish and we previsualize the get_translation return a DoesNotExist
+            # If the news has never been publish
+            # and we previsualize the get_translation return a DoesNotExist
             return self
 
     @property
     def original_image(self):
         return self.original.image
-    
+
     @property
     def link(self):
         return news_page_url(news=self)
@@ -132,7 +133,9 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
         to_return["publication_date"] = self.publication_date.strftime("%d %B %Y")
         to_return["types"] = [type_.slug for type_ in self.types.all()]
         if self.original_image:
-            to_return["image_link"] = generate_image_url(self.original_image, "fill-432x220")
+            to_return["image_link"] = generate_image_url(
+                self.original_image, "fill-432x220"
+            )
         else:
             to_return["image_link"] = None
         to_return["introduction"] = str(self.introduction)
@@ -140,9 +143,7 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
 
         if include_linked:
             # without this check, there could be an infinite loop in linked news
-            to_return["sites"] = [
-                site.to_dict() for site in self.sites.all()
-            ]
+            to_return["sites"] = [site.to_dict() for site in self.sites.all()]
 
         return to_return
 

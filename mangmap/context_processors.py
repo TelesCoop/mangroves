@@ -12,6 +12,7 @@ LAST_UPDATE: Dict[str, Union[None, datetime.datetime]] = {
     "general_context": None,
 }
 
+
 def is_recent(key: str):
     """Check if values for the given key have been updated recently."""
     if not LAST_UPDATE[key]:
@@ -23,8 +24,10 @@ def update_last_change(key):
     """Mark key as last updated now."""
     LAST_UPDATE[key] = datetime.datetime.now()
 
+
 def load_general_context(_):
     from wagtail.core.models import Page, Locale
+
     language_to_locale_id = {
         locale.language_code: locale.id for locale in Locale.objects.all()
     }
@@ -39,37 +42,49 @@ def load_general_context(_):
             translation_key=page.translation_key, locale_id=locale_id
         ).first()
 
-
-    # Add home page   
-    home_page_in_default_language = Page.objects.filter(content_type__model="homepage",
-            locale_id=default_locale_id
-        ).first()
+    # Add home page
+    home_page_in_default_language = Page.objects.filter(
+        content_type__model="homepage", locale_id=default_locale_id
+    ).first()
     for language_code, _ in language_to_locale_id.items():
         if home_page_in_default_language:
-            localized_page = get_localized_page(home_page_in_default_language, language_code)
+            localized_page = get_localized_page(
+                home_page_in_default_language, language_code
+            )
         else:
             localized_page = None
         context_per_language[language_code]["home_page"] = localized_page
 
-    # Add sites_link 
-    sites_page_in_default_language = SitesPage.objects.filter(locale_id=default_locale_id).first()
+    # Add sites_link
+    sites_page_in_default_language = SitesPage.objects.filter(
+        locale_id=default_locale_id
+    ).first()
     for language_code, _ in language_to_locale_id.items():
         if sites_page_in_default_language:
-            localized_page = get_localized_page(sites_page_in_default_language, language_code)
+            localized_page = get_localized_page(
+                sites_page_in_default_language, language_code
+            )
         else:
             localized_page = None
         context_per_language[language_code]["sites_link"] = pageurl({}, localized_page)
-        
-    # Add news_list_link 
-    news_list_page_in_default_language = NewsListPage.objects.filter(locale_id=default_locale_id).first()
+
+    # Add news_list_link
+    news_list_page_in_default_language = NewsListPage.objects.filter(
+        locale_id=default_locale_id
+    ).first()
     for language_code, _ in language_to_locale_id.items():
         if news_list_page_in_default_language:
-            localized_page = get_localized_page(news_list_page_in_default_language, language_code)
+            localized_page = get_localized_page(
+                news_list_page_in_default_language, language_code
+            )
         else:
             localized_page = None
-        context_per_language[language_code]["news_list_link"] = pageurl({}, localized_page)
+        context_per_language[language_code]["news_list_link"] = pageurl(
+            {}, localized_page
+        )
 
     return context_per_language
+
 
 def general_context(_):
     if not is_recent("general_context"):
@@ -82,6 +97,7 @@ def general_context(_):
     ):
         return general_context._general_context[language]
     return {}
+
 
 def language(_):
     """Templates need a language_code. Will be overriden by django if defined."""

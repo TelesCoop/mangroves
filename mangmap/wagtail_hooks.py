@@ -2,12 +2,15 @@ from django.templatetags.static import static
 from django.utils.html import format_html
 from wagtail.admin.panels import FieldPanel
 from wagtail.contrib.modeladmin.options import (
-    ModelAdmin,
     ModelAdminGroup,
     modeladmin_register,
 )
 from wagtail.core import hooks
-from wagtail_localize.modeladmin.views import TranslatableEditView, TranslatableCreateView
+
+# from wagtail_localize.modeladmin.views import (
+#     TranslatableEditView,
+#     TranslatableCreateView,
+# )
 from wagtail_localize.modeladmin.options import TranslatableModelAdmin
 
 from mangmap.models.country import WorldZone, Country

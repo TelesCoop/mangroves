@@ -9,11 +9,11 @@ from mangmap.constants import YEAR_Of_CREATION
 
 class HomePage(BannerImagePage, models.Model):
     from mangmap.models.utils import SIMPLE_RICH_TEXT_FIELD_FEATURE
-    
 
     def get_context(self, request, *args, **kwargs):
         from mangmap.models.site import Site
         from mangmap.models.news import News
+
         current_language = translation.get_language()
 
         context = super().get_context(request, *args, **kwargs)
@@ -21,7 +21,9 @@ class HomePage(BannerImagePage, models.Model):
         news = News.objects.filter(locale__language_code=current_language)
         context["n_sites"] = sites.count()
         context["n_tiles"] = sites.aggregate(n_tiles=models.Sum("tiles_nb"))["n_tiles"]
-        context["disponibility_years"] = f"{YEAR_Of_CREATION} - {datetime.date.today().year}"
+        context[
+            "disponibility_years"
+        ] = f"{YEAR_Of_CREATION} - {datetime.date.today().year}"
         first_news = news.filter(is_mangmap=True).first()
         if not first_news:
             first_news = news.first()
@@ -100,7 +102,7 @@ class HomePage(BannerImagePage, models.Model):
         max_length=64,
         default="Années disponibles",
     )
-    
+
     contact_block_title = models.CharField(
         blank=True,
         verbose_name="Titre",

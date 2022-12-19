@@ -50,18 +50,41 @@ class SitesPage(RoutablePageMixin, Page):
         context["has_vue"] = True
 
         context["thematics"] = json.dumps(
-            [thematic.to_dict() for thematic in Thematic.objects.filter(locale__language_code=current_language)]
+            [
+                thematic.to_dict()
+                for thematic in Thematic.objects.filter(
+                    locale__language_code=current_language
+                )
+            ]
         )
         context["site_types"] = json.dumps(
-            [model_to_dict(type_) for type_ in SiteType.objects.filter(locale__language_code=current_language)]
+            [
+                model_to_dict(type_)
+                for type_ in SiteType.objects.filter(
+                    locale__language_code=current_language
+                )
+            ]
         )
         context["zones"] = json.dumps(
-            [zone.to_dict() for zone in WorldZone.objects.filter(locale__language_code=current_language)]
+            [
+                zone.to_dict()
+                for zone in WorldZone.objects.filter(
+                    locale__language_code=current_language
+                )
+            ]
         )
         context["sites"] = json.dumps(
-            [site.to_dict() for site in Site.objects.filter(locale__language_code=current_language)]
+            [
+                site.to_dict()
+                for site in Site.objects.filter(locale__language_code=current_language)
+            ]
         )
         context["countries"] = json.dumps(
-            [country.to_dict() for country in Country.objects.filter(locale__language_code=current_language)]
+            [
+                country.to_dict()
+                for country in Country.objects.filter(
+                    locale__language_code=current_language
+                )
+            ]
         )
         return context

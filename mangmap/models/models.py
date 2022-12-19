@@ -15,24 +15,22 @@ from mangmap.models.utils import FreeBodyField
 class CustomImage(AbstractImage):
     caption = models.TextField(verbose_name="Légende et/ou Copyright", blank=True)
 
-    admin_form_fields = Image.admin_form_fields + (
-        'caption',
-    )
+    admin_form_fields = Image.admin_form_fields + ("caption",)
 
 
 class CustomRendition(AbstractRendition):
-    image = models.ForeignKey(CustomImage, on_delete=models.CASCADE, related_name='renditions')
+    image = models.ForeignKey(
+        CustomImage, on_delete=models.CASCADE, related_name="renditions"
+    )
 
     class Meta:
-        unique_together = (
-            ('image', 'filter_spec', 'focal_point_key'),
-        )
+        unique_together = (("image", "filter_spec", "focal_point_key"),)
 
 
 class BannerImagePage(Page):
     class Meta:
         abstract = True
-    
+
     banner_image = models.ForeignKey(
         CustomImage,
         verbose_name="Bandeau",
@@ -45,7 +43,6 @@ class BannerImagePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel("banner_image"),
     ]
-    
 
 
 class ContentPage(BannerImagePage, FreeBodyField):
@@ -58,24 +55,24 @@ class ContentPage(BannerImagePage, FreeBodyField):
     show_in_footer = models.BooleanField(
         verbose_name="Faire apparaître dans le bas de page",
         default=False,
-        help_text=
-            "Si un lien vers cette page devra apparaître dans le bas de page"
-        ,
+        help_text="Si un lien vers cette page devra \
+            apparaître dans le bas de page",
     )
 
     content_panels = BannerImagePage.content_panels + FreeBodyField.panels
 
     promote_panels = Page.promote_panels + [
-        MultiFieldPanel([
-            FieldPanel("show_in_footer"),
-        ]
-        , heading="Pour le bas de page du site"),
+        MultiFieldPanel(
+            [
+                FieldPanel("show_in_footer"),
+            ],
+            heading="Pour le bas de page du site",
+        ),
     ]
 
+
 class Tag(models.Model):
-    name = models.CharField(
-        verbose_name="Nom", max_length=100
-    )
+    name = models.CharField(verbose_name="Nom", max_length=100)
     slug = models.SlugField(
         verbose_name="Slug",
         max_length=100,
@@ -94,6 +91,7 @@ class Tag(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
 
 class SiteType(TranslatableMixin, Tag):
     class Meta(TranslatableMixin.Meta):

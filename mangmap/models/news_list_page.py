@@ -36,7 +36,9 @@ class NewsListPage(RoutablePageMixin, Page):
             request,
             context_overrides={
                 "news": news,
-                "news_page": NewsListPage.objects.filter(locale_id=self.locale_id).first(),
+                "news_page": NewsListPage.objects.filter(
+                    locale_id=self.locale_id
+                ).first(),
                 "modal_images": modal_images,
             },
             template="mangmap/news_page.html",
@@ -47,10 +49,18 @@ class NewsListPage(RoutablePageMixin, Page):
         context = super().get_context(request, *args, **kwargs)
         context["has_vue"] = True
         context["types"] = json.dumps(
-            [model_to_dict(type_) for type_ in ActualityType.objects.filter(locale__language_code=current_language)]
+            [
+                model_to_dict(type_)
+                for type_ in ActualityType.objects.filter(
+                    locale__language_code=current_language
+                )
+            ]
         )
         context["news_list"] = json.dumps(
-            [news.to_dict() for news in News.objects.filter(locale__language_code=current_language)]
+            [
+                news.to_dict()
+                for news in News.objects.filter(locale__language_code=current_language)
+            ]
         )
 
         return context
