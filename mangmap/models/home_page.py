@@ -44,6 +44,15 @@ class HomePage(BannerImagePage, models.Model):
         features=SIMPLE_RICH_TEXT_FIELD_FEATURE,
         verbose_name="Introduction",
     )
+    introduction_youtube_video_id = models.CharField(
+        max_length=15,
+        null=True,
+        blank=True,
+        verbose_name="Vidéo Youtube (id)",
+        help_text="Indiquer ici seulement l'id de la video youtube, celui-ci est indiqué dans l'url après 'v='. \
+            Exemple : pour https://www.youtube.com/watch?v=r3pQdvIHYBE renseigner r3pQdvIHYBE",
+    )
+
     news_block_title = models.CharField(
         blank=True,
         verbose_name="Titre du bloc des actualités",
@@ -77,6 +86,7 @@ class HomePage(BannerImagePage, models.Model):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="+",
+        help_text="Elle n'est utilisée que si aucune vidéo n'est renseignée",
     )
 
     key_figures_introduction = RichTextField(
@@ -129,6 +139,7 @@ class HomePage(BannerImagePage, models.Model):
                 FieldPanel("platform_block_title"),
                 FieldPanel("platform_block_description"),
                 FieldPanel("platform_block_cta"),
+                FieldPanel("introduction_youtube_video_id"),
                 FieldPanel("platform_block_image"),
             ],
             heading="Bloc concernant la plateforme",

@@ -52,8 +52,22 @@
         <a href="{{ settings.mangmap.StructureSettings.plateformUrl }}" class="button is-medium is-secondary my-5">{{ page.specific.platform_block_cta }}</a>
       </div>
       <div class="column is-6">
-        {% image page.specific.platform_block_image width-620 as platform_image %}
-        {% include "components/figure.html" with image=platform_image class="fr-responsive-img" %}
+        {% if page.specific.introduction_youtube_video_id %}
+          <div class="video-container">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube-nocookie.com/embed/{{page.specific.introduction_youtube_video_id}}"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        {% else %}
+          {% image page.specific.platform_block_image width-620 as platform_image %}
+          {% include "components/figure.html" with image=platform_image class="fr-responsive-img" %}
+        {% endif %}
       </div>
     </div>
     {# Figures #}

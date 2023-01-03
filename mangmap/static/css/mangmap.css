@@ -199,3 +199,17 @@
     font-size: 1.5rem;
     font-weight: 500;
 }
+
+.video-container {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 337px;
+    min-height: 280px;
+}
+
+@media (max-width: 768px) {
+    .video-container {
+        min-height: 0;
+    }
+}
