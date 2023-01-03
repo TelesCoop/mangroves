@@ -8,6 +8,7 @@
     minute: '{{ database_backup.minute }}'
     job: "{{ venv.path }}/bin/python {{ backend_path }}/manage.py backup_db backup"
 
+
 - name: "daily media backup"
   cron:
     user: "{{ main_user }}"

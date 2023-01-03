@@ -136,6 +136,10 @@ class StructureSettings(BaseSetting):
         null=True,
     )
 
+    linkedin = models.URLField(
+        help_text="URL de votre page LinkedIn", blank=True, null=True
+    )
+
     class Meta:
         verbose_name = "Paramètre de la structure"
 
