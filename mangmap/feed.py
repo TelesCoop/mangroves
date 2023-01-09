@@ -1,4 +1,5 @@
 from django.contrib.syndication.views import Feed
+from django.utils import translation
 
 from mangmap.models.news import News
 from mangmap.templatetags.main_tags import news_page_url
@@ -6,12 +7,14 @@ from mangmap.templatetags.main_tags import news_page_url
 
 class LatestNewsFeed(Feed):
     title = "News"
-    link = "/feed/news/latest"
+    link = "/feed/news/latest/"
     description = "Les dernières actualités de mangmap."
     description_template = "rss_feed.html"
 
     def items(self):
-        return News.objects.order_by("-publication_date")[:5]
+        return News.objects.filter(
+            locale__language_code=translation.get_language()
+        ).order_by("-publication_date")[:5]
 
     def item_title(self, item):
         return item.name
