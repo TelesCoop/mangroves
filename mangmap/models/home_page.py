@@ -23,7 +23,7 @@ class HomePage(BannerImagePage, models.Model):
         context["n_tiles"] = sites.aggregate(n_tiles=models.Sum("tiles_nb"))["n_tiles"]
         context[
             "disponibility_years"
-        ] = f"{YEAR_Of_CREATION} - {datetime.date.today().year}"
+        ] = f"{YEAR_Of_CREATION}-{datetime.date.today().year}"
         first_news = news.filter(is_mangmap=True).first()
         if not first_news:
             first_news = news.first()
@@ -89,11 +89,6 @@ class HomePage(BannerImagePage, models.Model):
         help_text="Elle n'est utilisée que si aucune vidéo n'est renseignée",
     )
 
-    key_figures_introduction = RichTextField(
-        features=SIMPLE_RICH_TEXT_FIELD_FEATURE + ["h2", "h3", "h4", "ol", "ul"],
-        verbose_name="Introduction",
-        default="Quelques chiffres clés",
-    )
     key_figures_sites_nb_title = models.CharField(
         blank=True,
         verbose_name="Titre pour le nombre de site mangroves",
@@ -146,7 +141,6 @@ class HomePage(BannerImagePage, models.Model):
         ),
         MultiFieldPanel(
             [
-                FieldPanel("key_figures_introduction"),
                 FieldPanel("key_figures_sites_nb_title"),
                 FieldPanel("key_figures_tiles_nb_title"),
                 FieldPanel("key_figures_year"),

@@ -16,12 +16,14 @@
         {% endfor %}
         <a href="/admin" class="button is-small is-text">{% translate "intranet" %}</a>
         <a href="/contact/?review=1" class="button is-small is-text">{% translate "Je donne mon avis" %}</a>
-        <a href="{{ settings.mangmap.StructureSettings.linkedin }}" class="button is-small is-text" target="_blank">
-          <span>{% translate "Suivez-nous" %}</span>
-          <span class="icon mb-2">
-            {% include "components/icon.html" with size="20" name="linkedin-box" %}
-          </span>
-        </a>
+        {% if settings.mangmap.StructureSettings.linkedin %}
+          <a href="{{ settings.mangmap.StructureSettings.linkedin }}" class="button is-small is-text" target="_blank">
+            <span>{% translate "Suivez-nous" %}</span>
+            <span class="icon mb-2">
+              {% include "components/icon.html" with size="20" name="linkedin-box" %}
+            </span>
+          </a>
+        {% endif %}
       </div>
 
     </div>
