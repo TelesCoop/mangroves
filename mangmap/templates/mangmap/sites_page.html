@@ -155,12 +155,8 @@
                   zones.forEach(zone => {
                       addedSitePerZone[zone.code] = {}
                   });
-                  console.log("-----------------")
                   for (const site of this.sites) {
                       var siteCountries = site.countries;
-                      console.log(site)
-                      console.log(sitesPerCountry)
-                      console.log(countryParameters)
                       for (const country of siteCountries) {
                         if (sitesPerCountry[country] == null) {
                             sitesPerCountry[country] = [];
