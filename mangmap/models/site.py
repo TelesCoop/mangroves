@@ -3,24 +3,23 @@ from django import forms
 from django.db import models
 from django.forms import model_to_dict
 from django.utils.text import slugify
+from django.utils import translation
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import TranslatableMixin, Locale
 from wagtail.search import index
 
-from mangmap.models.country import Country, WorldZone
+from mangmap.models.country import Country
 from mangmap.models.models import Thematic, SiteType
 from mangmap.models.utils import (
     TimeStampedModel,
     SIMPLE_RICH_TEXT_FIELD_FEATURE,
     FreeBodyField,
-    LocalizedSelectPanel,
 )
 
 
 class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
     countries = models.ManyToManyField(Country, verbose_name="Pays", blank=True)
-    zones = models.ManyToManyField(WorldZone, verbose_name="Zones", blank=True)
     name = models.CharField(verbose_name="Nom", max_length=100)
     slug = models.SlugField(
         max_length=100,
@@ -71,10 +70,9 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
         FieldPanel("source_link"),
         FieldPanel("file"),
         FieldPanel("body"),
-        LocalizedSelectPanel("zones", widget=forms.CheckboxSelectMultiple),
-        LocalizedSelectPanel("countries", widget=forms.SelectMultiple),
-        LocalizedSelectPanel("types", widget=forms.CheckboxSelectMultiple),
-        LocalizedSelectPanel("thematics", widget=forms.CheckboxSelectMultiple),
+        FieldPanel("countries", widget=forms.CheckboxSelectMultiple),
+        FieldPanel("types", widget=forms.CheckboxSelectMultiple),
+        FieldPanel("thematics", widget=forms.CheckboxSelectMultiple),
     ]
 
     def to_dict(self):
@@ -91,7 +89,7 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
             ],
         )
         to_return["thematics"] = [
-            thematic.slug for thematic in self.original_thematics.all()
+            thematic.slug for thematic in self.translated_thematics
         ]
         to_return["is_description_long"] = (
             is_description_long := len(self.short_description) >= 250
@@ -106,9 +104,7 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
         else:
             to_return["thematic"] = "multiple"
         zones = {
-            country.zone.code
-            for country in self.original_countries.all()
-            if country.zone
+            country.zone.code for country in self.translated_countries if country.zone
         }
         if len(zones) == 1:
             to_return["zone"] = next(iter(zones))
@@ -120,10 +116,8 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
         else:
             to_return["download_name"] = None
         to_return["is_download"] = self.is_download
-        to_return["countries"] = [
-            country.code for country in self.original_countries.all()
-        ]
-        to_return["types"] = [type_.slug for type_ in self.original_types.all()]
+        to_return["countries"] = [country.code for country in self.translated_countries]
+        to_return["types"] = [type_.slug for type_ in self.translated_types]
         return to_return
 
     def __str__(self):
@@ -135,13 +129,6 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
         if self.thematics.count() == 1:
             return self.thematics.first()
         return None
-
-    # def add_countries_from_zone(self):
-    #     # add all countries of all selected zones
-    #     for zone in self.zones.all():
-    #         for country in zone.country_set.all():
-    #             self.countries.add(country)
-    #     super().save()
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -159,20 +146,43 @@ class Site(TimeStampedModel, FreeBodyField, TranslatableMixin, index.Indexed):
             return self
 
     @property
-    def original_countries(self):
-        return self.original.countries
+    def translated_countries(self):
+        language = Locale.objects.get(language_code=translation.get_language())
+        if language.language_code == "fr":
+            return self.countries.all()
+        countries_list = []
+        for country in self.original.countries.all():
+            try:
+                countries_list.append(country.get_translation(language))
+            except Country.DoesNotExist:
+                countries_list.append(country)
+        return countries_list
 
     @property
-    def original_zones(self):
-        return self.original.zones
+    def translated_thematics(self):
+        language = Locale.objects.get(language_code=translation.get_language())
+        if language.language_code == "fr":
+            return self.thematics.all()
+        thematics_list = []
+        for thematic in self.original.thematics.all():
+            try:
+                thematics_list.append(thematic.get_translation(language))
+            except Thematic.DoesNotExist:
+                thematics_list.append(thematic)
+        return thematics_list
 
     @property
-    def original_thematics(self):
-        return self.original.thematics
-
-    @property
-    def original_types(self):
-        return self.original.types
+    def translated_types(self):
+        language = Locale.objects.get(language_code=translation.get_language())
+        if language.language_code == "fr":
+            return self.types.all()
+        types_list = []
+        for type in self.original.types.all():
+            try:
+                types_list.append(type.get_translation(language))
+            except SiteType.DoesNotExist:
+                types_list.append(type)
+        return types_list
 
     @property
     def link(self):

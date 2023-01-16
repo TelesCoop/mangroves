@@ -12,9 +12,9 @@
     <div class="card-content">
       <div class="is-flex" style="justify-content: space-between; font-size: 11px">
 
-        {% if site.zones.first %}
+        {% if site.translated_countries.0.zone %}
           <div>
-            {{ site.zones.first.name }}
+            {{ site.translated_countries.0.zone.name }}
           </div>
         {% endif %}
       </div>

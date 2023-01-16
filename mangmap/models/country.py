@@ -64,14 +64,6 @@ class Country(TranslatableMixin, Indexed):
         LocalizedSelectPanel("zone"),
     ]
 
-    # @cached_property
-    # def original(self):
-    #     return get_orignal(self)
-
-    # @property
-    # def original_zone(self):
-    #     return self.original.zone
-
     def __str__(self):
         if self.zone:
             return f"{self.zone.name} - {self.name}"

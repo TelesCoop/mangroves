@@ -94,6 +94,7 @@
                   isMapView: true,
                   map: null,
                   sites: JSON.parse('{{ sites | escapejs }}'),
+                  sitesPerZone: JSON.parse('{{ sites_per_zone | escapejs }}'),
                   countryParameters: countryParameters,
                   searchInput: '',
                   thematicBySlug: thematicBySlug,
@@ -154,15 +155,18 @@
                   zones.forEach(zone => {
                       addedSitePerZone[zone.code] = {}
                   });
-
+                  console.log("-----------------")
                   for (const site of this.sites) {
                       var siteCountries = site.countries;
+                      console.log(site)
+                      console.log(sitesPerCountry)
+                      console.log(countryParameters)
                       for (const country of siteCountries) {
                         if (sitesPerCountry[country] == null) {
                             sitesPerCountry[country] = [];
                         }
                         sitesPerCountry[country].push(site);
-                        const zone = countryParameters[country].zone;
+                        const zone = countryParameters[country]?.zone;
                         if (zone) {
                             if (sitesPerZone[zone] == null) {
                                 sitesPerZone[zone] = [];
@@ -204,7 +208,7 @@
                       title.innerHTML = (
                           "<span class='has-text-weight-bold'>" + sites.length + " sites </span>"
                           + (isShowingCountries ? "{% translate 'au' %}" : "{% translate 'en' %}")
-                          + " <span class='has-text-weight-bold'>" + localityParams.name + "</span> :"
+                          + " <span class='has-text-weight-bold'>" + localityParams?.name + "</span> :"
                       );
                       popupHolder.appendChild(title);
                       const sitesHolder = document.createElement("ul");
@@ -232,15 +236,6 @@
                           var elementIntro = document.createElement("p");
                           elementIntro.innerHTML = site.short_description_max_250;
                           elementContent.appendChild(elementIntro);
-                          if (site.link) {
-                              var elementButton = document.createElement("a");
-                              elementButton.href = site.link;
-                              elementButton.target = "_blank"
-                              elementButton.className = "button is-secondary";
-                              // TODO : Traduction !!
-                              elementButton.innerText = "{% translate 'Accéder au lien du site' %}";
-                              elementContent.appendChild(elementButton);
-                          }
 
                           var tuileNbElement = document.createElement("p");
                           tuileNbElement.className = "mt-2";
@@ -249,6 +244,14 @@
                           coverageElement.innerHTML = "<b>{% translate 'Couverture du littoral :' %} </b>" + site.coastline_coverage;
                           elementContent.appendChild(tuileNbElement);
                           elementContent.appendChild(coverageElement);
+                          if (site.link) {
+                              var elementButton = document.createElement("a");
+                              elementButton.href = site.link;
+                              elementButton.target = "_blank"
+                              elementButton.className = "button is-secondary is-small mt-2";
+                              elementButton.innerText = "{% translate 'Accéder au lien du site' %}";
+                              elementContent.appendChild(elementButton);
+                          }
 
                           element.appendChild(elementContent);
                           sitesHolder.appendChild(element);
@@ -261,12 +264,15 @@
                       );
 
                       // add the marker with popup to the map
-                      markers.push(
-                          new mapboxgl.Marker(marker)
-                              .setLngLat([localityParams.longitude, localityParams.latitude])
-                              .setPopup(popup)
-                              .addTo(this.map)
-                      );
+                      if (localityParams) {
+                        // if the country is not translated, localityParams is undefined
+                          markers.push(
+                              new mapboxgl.Marker(marker)
+                                  .setLngLat([localityParams.longitude, localityParams.latitude])
+                                  .setPopup(popup)
+                                  .addTo(this.map)
+                          );
+                      }
                   }
               }
           },

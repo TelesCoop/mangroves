@@ -73,12 +73,8 @@ class SitesPage(RoutablePageMixin, Page):
                 )
             ]
         )
-        context["sites"] = json.dumps(
-            [
-                site.to_dict()
-                for site in Site.objects.filter(locale__language_code=current_language)
-            ]
-        )
+        sites = Site.objects.filter(locale__language_code=current_language)
+        context["sites"] = json.dumps([site.to_dict() for site in sites])
         context["countries"] = json.dumps(
             [
                 country.to_dict()
@@ -87,4 +83,12 @@ class SitesPage(RoutablePageMixin, Page):
                 )
             ]
         )
+
+        sites_per_zone = {}
+        for site in sites:
+            sites_per_zone.setdefault(
+                site.translated_countries[0].zone.name, []
+            ).append(site.to_dict())
+        context["sites_per_zone"] = json.dumps(sites_per_zone)
+
         return context
