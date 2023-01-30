@@ -6,9 +6,21 @@ upstream app_servers_{{ project_slug }} {
 
 server {
 
-    listen 80;
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/mangmap.tlscp.fr/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/mangmap.tlscp.fr/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
     server_name {{ " ".join(public_hostnames) }};
+
+    {% for public_hostname in public_hostnames %}
+        {% if public_hostname != "www.mangmap.org" %}
+            if ($host = {{public_hostname}}) {
+                return 301 https://www.mangmap.org$request_uri;
+            }
+        {% endif %}
+    {% endfor %}
 
     access_log /var/log/nginx/access_{{ public_hostnames[0].replace('.', '_') }}.log;
     error_log /var/log/nginx/error_{{ public_hostnames[0].replace('.', '_') }}.log;
@@ -39,4 +51,20 @@ server {
         proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Host $server_name;
     }
+}
+
+
+server {
+
+    {% for public_hostname in public_hostnames %}
+        if ($host = {{public_hostname}}) {
+            return 301 https://www.mangmap.org$request_uri;
+        }
+    {% endfor %}
+
+    listen 80;
+
+    server_name {{ " ".join(public_hostnames) }};
+
+    return 404; # managed by Certbot
 }
