@@ -15,9 +15,10 @@ server {
     server_name {{ " ".join(public_hostnames) }};
 
     {% for public_hostname in public_hostnames %}
-        {% if public_hostname != "www.mangmap.org" %}
+        {% if public_hostname != "mangmap.tlscp.fr" %}
             if ($host = {{public_hostname}}) {
-                return 301 https://www.mangmap.org$request_uri;
+                # return 301 https://www.mangmap.org$request_uri;
+                return 301 https://mangmap.tlscp.fr$request_uri;
             }
         {% endif %}
     {% endfor %}
@@ -58,7 +59,8 @@ server {
 
     {% for public_hostname in public_hostnames %}
         if ($host = {{public_hostname}}) {
-            return 301 https://www.mangmap.org$request_uri;
+            # return 301 https://www.mangmap.org$request_uri;
+            return 301 https://mangmap.tlscp.fr$request_uri;
         }
     {% endfor %}
 

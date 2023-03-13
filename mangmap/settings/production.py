@@ -13,7 +13,8 @@ SECRET_KEY = config.getstr("security.secret_key")
 ALLOWED_HOSTS = config.getlist("security.allowed_hosts", [])
 STATIC_ROOT = config.getstr("staticfiles.static_root")
 
-WAGTAILADMIN_BASE_URL = "http://www.mangmap.org"
+# WAGTAILADMIN_BASE_URL = "http://www.mangmap.org"
+WAGTAILADMIN_BASE_URL = "http://mangmap.tlscp.fr"
 
 MIDDLEWARE.append(  # noqa: F405
     "rollbar.contrib.django.middleware.RollbarNotifierMiddleware"
