@@ -28,6 +28,7 @@ ANYMAIL = {
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "no-reply@telescoop.fr"
+CONTACT_RECIPIENTS = []
 SERVER_EMAIL = "no-reply@telescoop.fr"
 
 # rollbar
