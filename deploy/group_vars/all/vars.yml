@@ -9,7 +9,7 @@ public_hostnames:
   - www.mangmap.fr
   - mangmap.tlscp.fr
 django_project_name: mangmap
-backend_repo: https://gitlab.com/telescoop-public/mangroves
+backend_repo: https://gitlab.com/TelesCoop/mangroves
 backend_application_port: 8098  # must be unique for each project on the server
 backend_static_path: /{{ organization_slug }}/{{ project_slug}}/backend_static
 backend_media_path: /{{ organization_slug }}/{{ project_slug}}/backend/media
