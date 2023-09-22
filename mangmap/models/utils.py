@@ -78,6 +78,14 @@ class FreeBodyField(models.Model):
                         color_block,
                         image_block,
                         (
+                            "id",
+                            blocks.CharBlock(
+                                required=False,
+                                help_text="sert à créer des ancres",
+                                max_length=50,
+                            ),
+                        ),
+                        (
                             "position",
                             blocks.ChoiceBlock(
                                 choices=[
@@ -103,6 +111,14 @@ class FreeBodyField(models.Model):
                                         ),
                                         color_block,
                                         paragraph_block(["image"], False),
+                                        (
+                                            "id",
+                                            blocks.CharBlock(
+                                                required=False,
+                                                help_text="sert à créer des ancres",
+                                                max_length=50,
+                                            ),
+                                        ),
                                         (
                                             "columns",
                                             blocks.ListBlock(
