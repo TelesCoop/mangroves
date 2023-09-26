@@ -212,3 +212,10 @@
         min-height: 0;
     }
 }
+/* https://stackoverflow.com/a/13184714/3218806 */
+a.anchor {
+    display: block;
+    position: relative;
+    top: -150px;
+    visibility: hidden;
+}
