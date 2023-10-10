@@ -14,11 +14,15 @@
           :target="site.is_download ? '_self' : '_blank'">
           <div class="card-content">
             <p class="title is-6">[[ site.name ]]</p>
+            <p class="mt-2 is-size-7"><b>{% translate "Nombre de tuiles :" %}</b> [[site.tiles_nb]]</p>
+            <p class="is-size-7"><b>{% translate "Couverture du littoral :" %}</b> [[site.coastline_coverage]]</p>
           </div>
         </a>
         <div v-else class="card has-background-std">
           <div class="card-content">
             <p class="title is-6">[[ site.name ]]</p>
+            <p class="mt-2 is-size-7"><b>{% translate "Nombre de tuiles :" %}</b> [[site.tiles_nb]]</p>
+            <p class="is-size-7"><b>{% translate "Couverture du littoral :" %}</b> [[site.coastline_coverage]]</p>
           </div>
         </div>
       </template>
