@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-16 16:29+0100\n"
+"POT-Creation-Date: 2023-10-16 16:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: mangmap/models/utils.py:165
+#: mangmap/models/utils.py:200
 msgid ""
 "widget_class should be a Django form widget class of type "
 "CheckboxSelectMultiple, RadioSelect, Select or SelectMultiple"
@@ -52,11 +52,11 @@ msgstr "Intranet"
 msgid "Je donne mon avis"
 msgstr "Feedback"
 
-#: mangmap/templates/components/footer.html:20
+#: mangmap/templates/components/footer.html:21
 msgid "Suivez-nous"
 msgstr "Follow us"
 
-#: mangmap/templates/components/footer.html:32
+#: mangmap/templates/components/footer.html:33
 msgid "Développé par"
 msgstr "Developed by"
 
@@ -78,86 +78,87 @@ msgid "Télécharger le PDF"
 msgstr "Download the PDF"
 
 #: mangmap/templates/components/site_card.html:28
-#: mangmap/templates/components/sites_list_view.html:44
-#: mangmap/templates/mangmap/sites_page.html:239
+#: mangmap/templates/components/sites_list_view.html:17
+#: mangmap/templates/components/sites_list_view.html:24
+#: mangmap/templates/mangmap/sites_page.html:238
 msgid "Nombre de tuiles :"
 msgstr "Number of tiles:"
 
 #: mangmap/templates/components/site_card.html:29
-#: mangmap/templates/components/sites_list_view.html:45
-#: mangmap/templates/mangmap/sites_page.html:241
+#: mangmap/templates/components/sites_list_view.html:18
+#: mangmap/templates/components/sites_list_view.html:25
+#: mangmap/templates/mangmap/sites_page.html:240
 msgid "Couverture du littoral :"
 msgstr "Coastal coverage:"
 
 #: mangmap/templates/components/site_card.html:40
-#: mangmap/templates/components/sites_list_view.html:58
-#: mangmap/templates/mangmap/sites_page.html:233
+#: mangmap/templates/mangmap/sites_page.html:248
 msgid "Accéder au lien du site"
 msgstr "Go to the site link"
-
-#: mangmap/templates/components/sites_list_view.html:25
-msgid "Zone inconnue"
-msgstr "Unknown area"
 
 #: mangmap/templates/mangmap/contact_page.html:26
 msgid "Formulaire de contact"
 msgstr "Contact form"
 
-#: mangmap/templates/mangmap/contact_page.html:27
+#: mangmap/templates/mangmap/contact_page.html:32
 msgid "Les champs comprenant une astérisque (*) sont obligatoires."
 msgstr "Fields marked with an asterisk (*) are required."
 
-#: mangmap/templates/mangmap/contact_page.html:35
+#: mangmap/templates/mangmap/contact_page.html:39
 msgid "Prénom"
 msgstr "First name"
 
-#: mangmap/templates/mangmap/contact_page.html:41
-msgid "Adresse e-mail"
-msgstr "E-mail address"
-
-#: mangmap/templates/mangmap/contact_page.html:49
+#: mangmap/templates/mangmap/contact_page.html:48
 msgid "Nom"
 msgstr "Last name"
 
-#: mangmap/templates/mangmap/contact_page.html:55
+#: mangmap/templates/mangmap/contact_page.html:60
+msgid "Adresse e-mail"
+msgstr "E-mail address"
+
+#: mangmap/templates/mangmap/contact_page.html:69
 msgid "Pays"
 msgstr "Country"
 
-#: mangmap/templates/mangmap/contact_page.html:64
+#: mangmap/templates/mangmap/contact_page.html:81
 msgid "Quelle est la raison de votre prise de contact ?"
 msgstr "What is the reason for your contact?"
 
-#: mangmap/templates/mangmap/contact_page.html:68
+#: mangmap/templates/mangmap/contact_page.html:85
 msgid "Partage d'actualités"
 msgstr "Sharing news"
 
-#: mangmap/templates/mangmap/contact_page.html:69
+#: mangmap/templates/mangmap/contact_page.html:86
 msgid "Proposition de collaboration"
 msgstr "Proposal for collaboration"
 
-#: mangmap/templates/mangmap/contact_page.html:70
+#: mangmap/templates/mangmap/contact_page.html:87
 msgid "Partager une ressource"
 msgstr "Share a resource"
 
-#: mangmap/templates/mangmap/contact_page.html:71
+#: mangmap/templates/mangmap/contact_page.html:88
 msgid "Demande d'informations"
 msgstr "Request for information"
 
-#: mangmap/templates/mangmap/contact_page.html:72
+#: mangmap/templates/mangmap/contact_page.html:89
 msgid "Avis sur ce site web"
 msgstr "Feedback on this website"
 
-#: mangmap/templates/mangmap/contact_page.html:74
+#: mangmap/templates/mangmap/contact_page.html:91
 msgid "Autre"
 msgstr "Other"
 
-#: mangmap/templates/mangmap/contact_page.html:81
+#: mangmap/templates/mangmap/contact_page.html:101
 msgid "Message"
 msgstr "Message"
 
-#: mangmap/templates/mangmap/contact_page.html:91
-msgid "J'autorise ce site à conserver mes données transmises via ce formulaire"
-msgstr "I authorize this site to keep my data transmitted via this form"
+#: mangmap/templates/mangmap/contact_page.html:114
+msgid ""
+"J'autorise ce site à traiter mes données transmises via ce formulaire et les "
+"transférer à MangMap"
+msgstr ""
+"I authorise this site to process my data transmitted via this form and to "
+"transfer them to MangMap"
 
 #: mangmap/templates/mangmap/home_page.html:40
 #: mangmap/templates/mangmap/news_list_page.html:20
@@ -180,10 +181,6 @@ msgstr "Recommended news"
 msgid "Sites concernés"
 msgstr "Related sites"
 
-#: mangmap/templates/mangmap/sites_page.html:11
-msgid "Les sites"
-msgstr "Sites"
-
 #: mangmap/templates/mangmap/sites_page.html:28
 msgid "Voir la liste"
 msgstr "See the list"
@@ -192,10 +189,16 @@ msgstr "See the list"
 msgid "Voir sur la carte"
 msgstr "See on the map"
 
-#: mangmap/templates/mangmap/sites_page.html:198
+#: mangmap/templates/mangmap/sites_page.html:206
 msgid "au"
 msgstr "in"
 
-#: mangmap/templates/mangmap/sites_page.html:198
+#: mangmap/templates/mangmap/sites_page.html:206
 msgid "en"
 msgstr "in"
+
+#~ msgid "Zone inconnue"
+#~ msgstr "Unknown area"
+
+#~ msgid "Les sites"
+#~ msgstr "Coverage"

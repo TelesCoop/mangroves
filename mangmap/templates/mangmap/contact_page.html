@@ -111,7 +111,7 @@
                   <div class="control">
                     <label class="checkbox {% if form.errors.agree %}is-danger{% endif %}">
                       <input name="agree" type="checkbox" {% if form.cleaned_data.agree %}checked{% endif %}>
-                      {% trans "J'autorise ce site à traiter mes données transmises via ce formulaire et les transférer à Progysat" %}
+                      {% trans "J'autorise ce site à traiter mes données transmises via ce formulaire et les transférer à MangMap" %}
                     </label>
                     {% if form.errors.agree %}
                       <p class="help is-danger">{% for error in form.errors.agree %} {{ error }} {% endfor %}</p>
