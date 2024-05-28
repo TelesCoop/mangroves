@@ -5,23 +5,18 @@ upstream app_servers_{{ project_slug }} {
 }
 
 server {
-
     listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/mangmap.tlscp.fr/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/mangmap.tlscp.fr/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/mangmap.tlscp.fr-0001/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/mangmap.tlscp.fr-0001/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
-    server_name {{ " ".join(public_hostnames) }};
+    # remove to go live
+    if ($host = mangmap.org) {
+        return 404;
+    }
 
-    {% for public_hostname in public_hostnames %}
-        {% if public_hostname != "mangmap.tlscp.fr" %}
-            if ($host = {{public_hostname}}) {
-                # return 301 https://www.mangmap.org$request_uri;
-                return 404;
-            }
-        {% endif %}
-    {% endfor %}
+    server_name {{ " ".join(public_hostnames) }};
 
     access_log /var/log/nginx/access_{{ public_hostnames[0].replace('.', '_') }}.log;
     error_log /var/log/nginx/error_{{ public_hostnames[0].replace('.', '_') }}.log;
@@ -56,22 +51,18 @@ server {
 
 
 server {
-
-    {% for public_hostname in public_hostnames %}
-        {% if public_hostname == "mangmap.tlscp.fr" %}
-            if ($host = {{public_hostname}}) {
-                # return 301 https://www.mangmap.org$request_uri;
-                return 301 https://mangmap.tlscp.fr$request_uri;
-            }
-        {% else %}
-            if ($host = {{public_hostname}}) {
-                return 404;
-            }
-        {% endif %}
-
-    {% endfor %}
-
     listen 80;
+
+    if ($host = mangmap.org) {
+        return 301 https://mangmap.org$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = mangmap.tlscp.fr) {
+        return 301 https://mangmap.org$request_uri;
+    } # managed by Certbot
+
+    return 301 https://mangmap.org$request_uri;
 
     server_name {{ " ".join(public_hostnames) }};
 

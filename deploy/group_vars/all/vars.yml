@@ -5,8 +5,8 @@ project_slug: mangmap
 main_user: mangmap
 main_user_uid: 1080  # must be unique for each project on the server
 public_hostnames:
+  - mangmap.org
   - www.mangmap.org
-  - www.mangmap.fr
   - mangmap.tlscp.fr
 django_project_name: mangmap
 backend_repo: https://github.com/TelesCoop/mangroves
