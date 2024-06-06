@@ -15,7 +15,8 @@
           {% endif %}
         {% endfor %}
         <a href="/admin" class="button is-small is-text">{% translate "intranet" %}</a>
-        <a href="/contact/?review=1" class="button is-small is-text">{% translate "Je donne mon avis" %}</a>
+        {% get_current_language as LANGUAGE_CODE %}
+        <a href="/{{ LANGUAGE_CODE }}/contact/?review=1" class="button is-small is-text">{% translate "Je donne mon avis" %}</a>
         {% if settings.mangmap.StructureSettings.linkedin %}
           <a href="{{ settings.mangmap.StructureSettings.linkedin }}" class="button is-small is-text" target="_blank">
             <span>{% translate "Suivez-nous" %}</span>
