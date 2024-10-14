@@ -11,11 +11,6 @@ server {
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
-    # remove to go live
-    if ($host = mangmap.org) {
-        return 404;
-    }
-
     server_name {{ " ".join(public_hostnames) }};
 
     access_log /var/log/nginx/access_{{ public_hostnames[0].replace('.', '_') }}.log;
