@@ -6,6 +6,6 @@ ipython
 rollbar==0.16.2
 telescoop-backup==0.6.4
 Unidecode==1.3.4
-wagtail==4.1.1
+wagtail==4.1.4
 wagtail-localize==1.3.3
 Wand==0.6.13
