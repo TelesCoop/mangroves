@@ -74,7 +74,7 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
     sites = models.ManyToManyField(Site, blank=True, verbose_name="Sites concernés")
 
     search_fields = [
-        index.SearchField("name", partial_match=True),
+        index.SearchField("name"),
         index.FilterField("publication_date"),
     ]
 
