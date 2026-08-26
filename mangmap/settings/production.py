@@ -49,7 +49,9 @@ class MyFileStorage(ManifestStaticFilesStorage):
     manifest_strict = False
 
 
-STATICFILES_STORAGE = "mangmap.settings.production.MyFileStorage"
+STORAGES["staticfiles"] = {  # noqa: F405
+    "BACKEND": "mangmap.settings.production.MyFileStorage",
+}
 
 # BACKUP
 INSTALLED_APPS.append("telescoop_backup")  # noqa: F405
