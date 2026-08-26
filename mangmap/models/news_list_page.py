@@ -5,7 +5,7 @@ from django.http import Http404
 from django.utils import translation
 from rest_framework.utils import json
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from mangmap.models import ActualityType
 from mangmap.models.news import News

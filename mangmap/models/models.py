@@ -3,9 +3,9 @@ from typing import List
 from django.utils.text import slugify
 from django.db import models
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.contrib.settings.models import BaseSetting
+from wagtail.contrib.settings.models import BaseSiteSetting
 from wagtail.contrib.settings.registry import register_setting
-from wagtail.core.models import Page, TranslatableMixin
+from wagtail.models import Page, TranslatableMixin
 from wagtail.documents.models import Document
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
 
@@ -128,7 +128,7 @@ class Thematic(TranslatableMixin, Tag):
 
 
 @register_setting
-class StructureSettings(BaseSetting):
+class StructureSettings(BaseSiteSetting):
     plateformUrl = models.URLField(
         verbose_name="Lien de la plateforme",
         max_length=300,
@@ -145,7 +145,7 @@ class StructureSettings(BaseSetting):
 
 
 @register_setting
-class AnalyticsScriptSetting(BaseSetting):
+class AnalyticsScriptSetting(BaseSiteSetting):
     script = models.TextField(
         help_text="Script d'analytics",
         blank=True,

@@ -10,9 +10,9 @@ from django.forms.widgets import (
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.admin.panels import FieldPanel
-from wagtail.core import blocks
-from wagtail.core.models import Locale
-from wagtail.core.fields import StreamField
+from wagtail import blocks
+from wagtail.models import Locale
+from wagtail.fields import StreamField
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 

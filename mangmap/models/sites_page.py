@@ -6,8 +6,8 @@ from django.db import models
 from django.utils import translation
 from wagtail.admin.panels import FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
+from wagtail.models import Page
+from wagtail.fields import RichTextField
 
 from mangmap.models import Thematic
 from mangmap.models.country import Country

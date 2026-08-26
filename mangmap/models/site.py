@@ -5,8 +5,8 @@ from django.forms import model_to_dict
 from django.utils.text import slugify
 from django.utils import translation
 from wagtail.admin.panels import FieldPanel
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import TranslatableMixin, Locale
+from wagtail.fields import RichTextField
+from wagtail.models import TranslatableMixin, Locale
 from wagtail.search import index
 
 from mangmap.models.country import Country

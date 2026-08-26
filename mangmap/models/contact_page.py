@@ -4,8 +4,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render
 from wagtail.admin.panels import FieldPanel
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import Page
+from wagtail.fields import RichTextField
+from wagtail.models import Page
 
 from mangmap.forms import ContactForm
 from mangmap.models.utils import SIMPLE_RICH_TEXT_FIELD_FEATURE
