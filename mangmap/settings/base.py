@@ -84,6 +84,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "mangmap.context_processors.general_context",
                 "mangmap.context_processors.language",
+                "mangmap.context_processors.mapbox",
                 "wagtail.contrib.settings.context_processors.settings",
             ],
         },

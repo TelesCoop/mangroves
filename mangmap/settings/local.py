@@ -9,3 +9,5 @@ BACKUP_ACCESS = config.getstr("backup.backup_access")  # S3 ACCESS
 BACKUP_SECRET = config.getstr("backup.backup_secret")  # S3 SECRET KEY
 BACKUP_BUCKET = config.getstr("backup.backup_bucket")  # S3 Bucket
 BACKUP_REGION = config.getstr("backup.backup_region", "eu-west-3")
+
+MAPBOX_ACCESS_TOKEN = config.getstr("map.mapbox_access_token", "")

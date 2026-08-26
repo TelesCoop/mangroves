@@ -61,3 +61,6 @@ BACKUP_BUCKET = "mangmap-backup"  # S3 Bucket
 BACKUP_KEEP_N_DAYS = 31  # Optional, defaults to 31
 BACKUP_REGION = "eu-west-3"  # Optional, defaults to eu-west-3 (Paris)
 BACKUP_HOST = "s3.eu-west-3.amazonaws.com"  # Optional, default to s3.{BACKUP_REGIOn}.amazonaws.com
+
+# Mapbox
+MAPBOX_ACCESS_TOKEN = config.getstr("map.mapbox_access_token")

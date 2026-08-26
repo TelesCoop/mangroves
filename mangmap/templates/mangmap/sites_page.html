@@ -123,7 +123,7 @@
                   document.head.appendChild(script); //or something of the likes
               },
               initMap() {
-                  mapboxgl.accessToken = 'pk.eyJ1IjoibWF4aW1ldGVsZXNjb29wIiwiYSI6ImNrbHJrbWV6ajAzd20ycXB2YjZodzZ0ancifQ.VLDpa6x-j-3kh65_S-H_rA';
+                  mapboxgl.accessToken = '{{ mapbox_access_token|escapejs }}';
 
                   this.map = new mapboxgl.Map({
                       container: 'map',
