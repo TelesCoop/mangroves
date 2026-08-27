@@ -1,10 +1,10 @@
 from django.db import models
 from django.forms import model_to_dict
 from wagtail.admin.panels import FieldPanel
-from wagtail.search import index
-from wagtail.search.index import Indexed
 from wagtail.documents.models import Document
 from wagtail.models import TranslatableMixin
+from wagtail.search import index
+from wagtail.search.index import Indexed
 from mangmap.models.utils import LocalizedSelectPanel
 
 

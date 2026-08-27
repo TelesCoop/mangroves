@@ -5,9 +5,9 @@ from django.db import models
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting
 from wagtail.contrib.settings.registry import register_setting
-from wagtail.models import Page, TranslatableMixin
 from wagtail.documents.models import Document
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
+from wagtail.models import Page, TranslatableMixin
 
 from mangmap.models.utils import FreeBodyField
 

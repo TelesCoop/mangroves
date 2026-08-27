@@ -13,3 +13,5 @@ local_settings.ini
 /labo/static/.sass-cache/
 COMPILED/
 *.xlsx
+
+.vscode/

@@ -8,8 +8,8 @@ from django.utils.text import slugify
 from django.utils import translation
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
-from wagtail.models import TranslatableMixin, Locale
 from wagtail.images.views.serve import generate_image_url
+from wagtail.models import Locale, TranslatableMixin
 from wagtail.search import index
 
 from mangmap.models.country import Country, WorldZone
