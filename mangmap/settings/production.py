@@ -14,6 +14,13 @@ SECRET_KEY = config.getstr("security.secret_key")
 ALLOWED_HOSTS = config.getlist("security.allowed_hosts", [])
 STATIC_ROOT = config.getstr("staticfiles.static_root")
 
+# nginx terminates TLS and proxies to gunicorn over plain HTTP; without this,
+# request.is_secure() is always False and Django 4+'s Origin check on POST
+# requests (admin login, forms) rejects the browser's https:// Origin -> 403.
+# See deploy/roles/frontend/templates/nginx.conf.j2 (X-Forwarded-Proto).
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
+
 # WAGTAILADMIN_BASE_URL = "http://www.mangmap.org"
 WAGTAILADMIN_BASE_URL = "http://mangmap.tlscp.fr"
 
