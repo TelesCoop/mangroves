@@ -3,7 +3,7 @@ from collections import defaultdict
 from typing import Dict, Union
 from django.conf import settings
 from django.utils import translation
-from wagtail.core.templatetags.wagtailcore_tags import pageurl
+from wagtail.templatetags.wagtailcore_tags import pageurl
 
 from mangmap.models import SitesPage, NewsListPage
 
@@ -26,7 +26,7 @@ def update_last_change(key):
 
 
 def load_general_context(_):
-    from wagtail.core.models import Page, Locale
+    from wagtail.models import Page, Locale
 
     language_to_locale_id = {
         locale.language_code: locale.id for locale in Locale.objects.all()
@@ -102,3 +102,7 @@ def general_context(_):
 def language(_):
     """Templates need a language_code. Will be overriden by django if defined."""
     return {"language_code": translation.get_language()}
+
+
+def mapbox(_):
+    return {"mapbox_access_token": getattr(settings, "MAPBOX_ACCESS_TOKEN", "")}

@@ -7,9 +7,9 @@ from django.forms import model_to_dict
 from django.utils.text import slugify
 from django.utils import translation
 from wagtail.admin.panels import FieldPanel
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import TranslatableMixin, Locale
+from wagtail.fields import RichTextField
 from wagtail.images.views.serve import generate_image_url
+from wagtail.models import Locale, TranslatableMixin
 from wagtail.search import index
 
 from mangmap.models.country import Country, WorldZone
@@ -74,7 +74,7 @@ class News(TranslatableMixin, index.Indexed, TimeStampedModel, FreeBodyField):
     sites = models.ManyToManyField(Site, blank=True, verbose_name="Sites concernés")
 
     search_fields = [
-        index.SearchField("name", partial_match=True),
+        index.SearchField("name"),
         index.FilterField("publication_date"),
     ]
 

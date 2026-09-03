@@ -1,6 +1,7 @@
 __pycache__
 *.db
 *.sqlite3
+*.sqlite3.backup-*
 *.csv
 .idea
 local_settings.ini
@@ -12,3 +13,5 @@ local_settings.ini
 /labo/static/.sass-cache/
 COMPILED/
 *.xlsx
+
+.vscode/

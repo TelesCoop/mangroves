@@ -9,7 +9,7 @@ class SearchDescriptionAndTranslationMiddleware:
     """Middleware to add search_description, seo_title and translated_url to the context."""
 
     def __init__(self, get_response):
-        from wagtail.core.models import Locale
+        from wagtail.models import Locale
 
         self.get_response = get_response
         locales = Locale.objects.all()

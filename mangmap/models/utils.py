@@ -9,12 +9,12 @@ from django.forms.widgets import (
 )
 from django.utils.translation import gettext_lazy as _
 
+from wagtail import blocks
 from wagtail.admin.panels import FieldPanel
-from wagtail.core import blocks
-from wagtail.core.models import Locale
-from wagtail.core.fields import StreamField
 from wagtail.documents.blocks import DocumentChooserBlock
+from wagtail.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.models import Locale
 
 
 def paragraph_block(additional_field, required):
@@ -151,7 +151,6 @@ class FreeBodyField(models.Model):
         blank=True,
         verbose_name="Contenu",
         help_text="Corps de la page",
-        use_json_field=True,
     )
 
     panels = [
@@ -225,9 +224,9 @@ class LocalizedSelectPanel(FieldPanel):
                     choices=self.choice_list
                 )
             if self.panel.typed_choice_field:
-                self.form.fields[
-                    self.field_name
-                ].__class__.__name__ = "typed_choice_field"
+                self.form.fields[self.field_name].__class__.__name__ = (
+                    "typed_choice_field"
+                )
             pass
 
         @property

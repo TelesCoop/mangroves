@@ -1,11 +1,11 @@
 from django.templatetags.static import static
 from django.utils.html import format_html
+from wagtail import hooks
 from wagtail.admin.panels import FieldPanel
-from wagtail.contrib.modeladmin.options import (
+from wagtail_modeladmin.options import (
     ModelAdminGroup,
     modeladmin_register,
 )
-from wagtail.core import hooks
 
 # from wagtail_localize.modeladmin.views import (
 #     TranslatableEditView,

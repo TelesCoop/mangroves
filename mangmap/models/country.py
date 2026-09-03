@@ -1,10 +1,10 @@
 from django.db import models
 from django.forms import model_to_dict
 from wagtail.admin.panels import FieldPanel
+from wagtail.documents.models import Document
+from wagtail.models import TranslatableMixin
 from wagtail.search import index
 from wagtail.search.index import Indexed
-from wagtail.documents.models import Document
-from wagtail.core.models import TranslatableMixin
 from mangmap.models.utils import LocalizedSelectPanel
 
 
@@ -52,8 +52,8 @@ class Country(TranslatableMixin, Indexed):
     zone = models.ForeignKey(WorldZone, on_delete=models.SET_NULL, null=True)
 
     search_fields = [
-        index.SearchField("name", partial_match=True),
-        index.SearchField("code", partial_match=True),
+        index.SearchField("name"),
+        index.SearchField("code"),
     ]
 
     panels = [

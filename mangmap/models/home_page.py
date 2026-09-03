@@ -2,7 +2,7 @@ import datetime
 from django.db import models
 from django.utils import translation
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.core.fields import RichTextField
+from wagtail.fields import RichTextField
 from mangmap.models.models import BannerImagePage, CustomImage
 from mangmap.constants import YEAR_Of_CREATION
 
