@@ -10,7 +10,7 @@ local_settings.ini
 *.mo
 
 /media/
-/labo/static/.sass-cache/
+/mangmap/static/.sass-cache/
 COMPILED/
 *.xlsx
 
