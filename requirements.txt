@@ -1,11 +1,11 @@
 Django>=5.2,<5.3
-django-anymail[mailgun]==15.1
+django-anymail[mailgun]==15.2
 getconf==1.11.1
 gunicorn==26.2.0
 ipython
-rollbar==1.4.0
-telescoop-backup==0.6.5
+rollbar==1.5.0
+telescoop-backup==0.6.7
 Unidecode==1.4.0
 wagtail==7.4.3
 wagtail-localize==1.14.5
-wagtail-modeladmin==2.4.0
+wagtail-modeladmin==2.5.0
